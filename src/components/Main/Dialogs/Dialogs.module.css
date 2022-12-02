@@ -1,0 +1,46 @@
+.dialogsUsersNames {
+	display:grid;
+	padding: 1rem;
+	grid-template-columns: minmax(auto,150px) 1fr;
+	grid-template-rows: 1fr;
+	gap: 20px;
+	
+}
+.dialogs div {
+	overflow: auto;
+	/*padding-bottom: 20px;*/
+}
+.activeLink {
+	color: chocolate;
+	font-weight: 700;
+	transition: all 1s;
+	letter-spacing: 2px;
+	font-size: 1.5rem;
+}
+.messagesBlock {
+	display:grid;
+	line-height: 2rem;
+	grid-template-columns: minmax(300px, 1fr);
+	grid-template-rows: repeat(auto);
+}
+.messagesBlock>div{
+	display: flex;
+	background-color: cornflowerblue;
+	padding: 0;
+	align-content: center;
+}
+.messagesBlock :nth-child(even) {
+	justify-self: end;
+}
+.messagesBlock :nth-child(odd) {
+	justify-self: start;
+}
+.messagesBlock div::before {
+	display: inline-block;
+	content: "";
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	background-color: red;
+	margin-right: 1rem;
+}

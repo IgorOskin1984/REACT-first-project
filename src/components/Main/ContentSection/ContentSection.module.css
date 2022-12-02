@@ -1,0 +1,8 @@
+.contentBody {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: minmax(auto, 120px) auto auto;
+}
+.content {
+	padding: 2rem;
+}

@@ -1,0 +1,10 @@
+.footer {
+	grid-column: 2/3;
+	background-color: tomato;
+	padding-left: 2rem;
+	color: #fff;
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 2rem;
+	line-height: 5rem;
+}

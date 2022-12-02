@@ -1,0 +1,17 @@
+.sidebar {
+	background: green;
+	color:white;
+}
+.sidebar__item {
+	text-decoration: none;
+	color: white;
+}
+.friendsImg {
+	width: 2rem;
+	height: 2rem;
+	overflow: hidden;
+}
+.friendsSection {
+	position: relative;
+}
+

@@ -1,0 +1,10 @@
+.header {
+	grid-column: 2/3;
+	background-color: red;
+	padding-left: 2rem;
+	color: #fff;
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 2rem;
+	line-height: 6rem;
+}

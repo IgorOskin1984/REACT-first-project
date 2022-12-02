@@ -1,0 +1,8 @@
+.main {
+	background-color: tan;
+	grid-column: 2/3;
+	display: grid;
+	grid-template-columns: minmax(auto, 300px) 1fr;
+	grid-template-rows: 1fr;
+	row-gap: 2rem;
+}
