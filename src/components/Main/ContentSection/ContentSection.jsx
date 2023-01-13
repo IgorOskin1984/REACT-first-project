@@ -6,6 +6,7 @@ import ProfileSection from "./ProfileSection/ProfileSection";
 import PostSection from "./PostSection/PostSection";
 
 const ContentSection = (props) => {
+	//console.log(props);
 	return (
 		<section className={style.contentBody}>
 			<Wallpapers />
@@ -14,8 +15,8 @@ const ContentSection = (props) => {
 				<ProfileSection />
 
 				<PostSection
-					profilePage={props.profilePage}
-					dispatch={props.dispatch}/>
+					//store={props.store}
+				/>
 			</section>
 		</section>
 	)

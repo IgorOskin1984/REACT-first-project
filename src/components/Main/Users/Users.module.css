@@ -1,0 +1,42 @@
+.user_conteiner {
+	background-color: lightcoral;
+	margin-bottom: 1rem;
+	padding:  1rem;
+	padding-bottom: 0;
+	display: grid;
+	grid-template-columns: minmax(100px,200px) 1fr;
+	grid-template-rows: minmax(100px, 200px);
+}
+.discription_conteiner {
+	display: flex;
+	justify-content: space-between;
+	font-size: 2rem;
+	line-height: 3rem;
+	font-weight: 600;
+}
+
+.img_conteiner{
+text-align: center;
+}
+.uaser_avatar {
+	max-height: 150px;
+}
+
+.discription_block {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+
+}
+.discription_block button {
+	max-width: 100px;
+	align-self: center;
+}
+.pageNumbers span{
+	padding: 1rem;
+}
+.selectedPage {
+	font-size: 1.5rem;
+	transition: font-size 1.5s;
+	font-weight: 700;
+}

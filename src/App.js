@@ -11,9 +11,7 @@ const App = (props) => {
 	return (
 		<div className='wrapper'>
 			<Header />
-			<Main
-				state={props.state}
-				dispatch={props.dispatch} />
+			<Main />
 			<Footer />
 		</div>
 	)

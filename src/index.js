@@ -6,7 +6,8 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
-import store from './redax/redux-stor';
+import store from './redax/redux-store';
+import { Provider } from 'react-redux';
 
 
 
@@ -14,26 +15,14 @@ import store from './redax/redux-stor';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-let rerenderEntireTree = (state) => {
 	root.render(
-		<React.StrictMode>
+		//<React.StrictMode>
 			<BrowserRouter>
-				<App
-					state={state}
-					dispatch={store.dispatch.bind(store)} />
+				<Provider store={store}>
+					<App />
+				</Provider>
 			</BrowserRouter>
-		</React.StrictMode>
+		//</React.StrictMode>
 	);
-}
-
-
-
-rerenderEntireTree(store.getState());
-
-store.subscribe( () => {
-rerenderEntireTree(store.getState())
-})
-//этот вариант почему-то не работает??
-//store.subscribe(rerenderEntireTree(store.getState()))
 
 reportWebVitals();

@@ -10,32 +10,41 @@ export const apdateNewPostTextActionCreator = (text) => ({
 
 let initialState = {
 	postBodyData: [
-				{ id: '1', text: 'Helo world', postLikeCounter: '11' },
-			],
-			newPostText: ''
+		{
+			id: '1',
+			text: 'Helo world',
+			postLikeCounter: '11'
+		}
+	],
+	newPostText: ''
 }
 
-const profilePageReducer = (profilePageState = initialState, action) => {
+const profilePageReducer = (state = initialState, action) => {
+
 	switch (action.type) {
 
 		case ADD_POST:
 			let newPost = {
 				id: 5,
-				text: profilePageState.newPostText,
+				text: state.newPostText,
 				postLikeCounter: 0
 			};
-			profilePageState.postBodyData.push(newPost);
-			profilePageState.newPostText = '';
-			return profilePageState;
-			
+			return {
+				...state,
+				postBodyData: [...state.postBodyData, newPost],
+				newPostText: ''
+			}
+
 		case APDATE_NEW_POST_TEXT:
-			profilePageState.newPostText = action.newText;
-			return profilePageState;
+			return {
+				...state,
+				newPostText: action.newText
+			}
 
 		default:
-			return profilePageState;
+			return state;
 	}
-} 
+}
 
 
 export default profilePageReducer;

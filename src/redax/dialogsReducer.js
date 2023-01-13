@@ -22,26 +22,32 @@ let initialState = {
 	newMesage: ''
 }
 
-const dialogsPageReducer = (dialogsPageState = initialState, action) => {
+const dialogsPageReducer = (state = initialState, action) => {
 	switch (action.type) {
 
-		case ADD_NEW_MESSAGE:
+		case ADD_NEW_MESSAGE:{
 			let newMessage = {
 				id: 4,
-				messageText: dialogsPageState.newMesage
+				messageText: state.newMesage
 			}
-			dialogsPageState.messageItemData.push(newMessage);
-			dialogsPageState.newMesage = '';
-			return dialogsPageState;
+
+			return  {
+				...state,
+				messageItemData: [...state.messageItemData, newMessage],
+				newMesage: ""
+			};
+		}
 
 		case APDATE_NEW_MESSAGE_TEXT:
-			dialogsPageState.newMesage = action.newMessageText;
-			return dialogsPageState;
+			return {
+				...state,
+				newMesage: action.newMessageText
+			}
 
 		default:
-			return dialogsPageState;
+			return state;
 	}
-} 
+}
 
 
 export default dialogsPageReducer;

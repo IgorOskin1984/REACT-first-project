@@ -27,12 +27,13 @@ const Sidebar = () => {
 						<NavLink to={'/settings'} className={style.sidebar__link}>Settings</NavLink>
 					</li>
 					<li className={style.sidebar__item}>
-						<NavLink to={'/friends'} className={style.sidebar__link}>My friends</NavLink>
+						<NavLink to={'/users'} className={style.sidebar__link}>All users</NavLink>
 					</li>
 				</ul>
 			</nav>
 
 			<div className={style.friendsSection}>
+				<span>Friends online</span>
 				<SideFriend/>
 				<SideFriend/>
 				<SideFriend/>
