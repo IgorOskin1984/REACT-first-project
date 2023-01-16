@@ -4,7 +4,7 @@ import PostBodyContainer from "./PostBody/PostBodyContainer";
 import PostInputContainer from "./PostInput/PostInputContainer";
 
 
-const PostSection = (props) => {
+const MyPostsContainer = (props) => {
 	//console.log(props);
 
 	return (
@@ -19,5 +19,5 @@ const PostSection = (props) => {
 	)
 }
 
-export default PostSection;
+export default MyPostsContainer;
 

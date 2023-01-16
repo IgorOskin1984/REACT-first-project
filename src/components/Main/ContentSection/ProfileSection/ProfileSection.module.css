@@ -1,6 +1,0 @@
-.profile__discription {
-	display: grid;
-	grid-template-columns: minmax(auto, 200px) 1fr;
-	grid-template-rows: auto;
-	column-gap: 2rem;
-}

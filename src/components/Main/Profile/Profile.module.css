@@ -1,0 +1,5 @@
+.contentBody {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: minmax(auto, 120px) auto;
+}

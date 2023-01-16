@@ -1,13 +1,14 @@
 import React from "react";
 import style from './Main.module.css';
 import Sidebar from "./Sidebar/Sidebar";
-import ContentSection from "./ContentSection/ContentSection";
+import Profile from "./Profile/Profile";
 import DialogsConteiner from "./Dialogs/DialogsContainer";
 import { Route, Routes } from "react-router-dom";
 import Music from "./Music/Music";
 import News from "./News/News";
 import Settings from "./Settings/Settings";
-import UsersConteiner from "./Users/UsersConteiner";
+import UsersConteiner from "./Users/UsersContainer";
+import ProfileContainer from './Profile/ProfileContainer'
 
 const Main = (props) => {
 	//console.log(props);
@@ -19,10 +20,10 @@ const Main = (props) => {
 			<section>
 				<Routes>
 					<Route path="/"
-						element={<ContentSection />}
+						element={<Profile />}
 					/>
-					<Route path="/profile"
-						element={<ContentSection />}
+					<Route path="/profile/*"
+						element={<ProfileContainer />}
 					/>
 					<Route path="/dialogs/*"
 						element={<DialogsConteiner />}
