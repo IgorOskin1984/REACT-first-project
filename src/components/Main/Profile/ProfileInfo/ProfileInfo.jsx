@@ -3,10 +3,10 @@ import style from './ProfileInfo.module.css';
 import logo_01 from './../../../../img/01.jpg';
 import smile from './../../../../img/smile.jpg'
 import Preloader from '../../../common/Preloader/Preloader';
+import { ProfileStatus } from './ProfileStatus';
 
 
 export const ProfileInfo = (props) => {
-	//console.log(props);
 
 	if (!props.profile) {
 		return <Preloader/>
@@ -35,6 +35,9 @@ export const ProfileInfo = (props) => {
 						<p>about me</p>
 					</div>
 				</div>
+
+				<ProfileStatus status = {'Hello world'} />
+
 
 			</div>
 		</div>

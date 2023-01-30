@@ -8,3 +8,8 @@
 	font-size: 2rem;
 	line-height: 6rem;
 }
+
+.login_block {
+	display: inline-block;
+	float: right;
+}

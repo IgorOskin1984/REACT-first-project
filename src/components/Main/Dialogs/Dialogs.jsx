@@ -1,10 +1,13 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
 import style from './Dialogs.module.css';
 
 const Dialogs = (props) => {
-	//console.log(props);
+	//console.log(props.isAuth);
 	//debugger
-	
+	//if (!props.isAuth) {
+	//	return  <Navigate to={'/login'} />
+	//}
 
 	return (
 		<div>

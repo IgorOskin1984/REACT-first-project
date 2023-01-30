@@ -2,9 +2,9 @@ import React from "react";
 import style from './Profile.module.css';
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./PostSection/MyPostsContainer";
+import { Navigate } from "react-router-dom";
 
 const Profile = (props) => {
-	//debugger
 	return (
 		<section className={style.contentBody}>
 			<ProfileInfo profile = {props.profile} />

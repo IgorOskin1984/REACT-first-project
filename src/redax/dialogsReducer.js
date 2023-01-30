@@ -1,13 +1,6 @@
 const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE';
 const APDATE_NEW_MESSAGE_TEXT = 'APDATE-NEW-MESSAGE-TEXT';
 
-export const addNewMessageActionCreator = () => ({ type: ADD_NEW_MESSAGE })
-
-export const apdateNewMessageTextActionCreator = (text) => ({
-	type: APDATE_NEW_MESSAGE_TEXT,
-	newMessageText: text
-})
-
 let initialState = {
 	dialogItemUserData: [
 		{ name: 'Ihor', id: '1' },
@@ -48,6 +41,13 @@ const dialogsPageReducer = (state = initialState, action) => {
 			return state;
 	}
 }
+
+export const addNewMessageActionCreator = () => ({ type: ADD_NEW_MESSAGE })
+
+export const apdateNewMessageTextActionCreator = (text) => ({
+	type: APDATE_NEW_MESSAGE_TEXT,
+	newMessageText: text
+})
 
 
 export default dialogsPageReducer;

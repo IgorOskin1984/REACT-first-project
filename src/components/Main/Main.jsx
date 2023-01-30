@@ -9,6 +9,7 @@ import News from "./News/News";
 import Settings from "./Settings/Settings";
 import UsersConteiner from "./Users/UsersContainer";
 import ProfileContainer from './Profile/ProfileContainer'
+import LoginPage from "../LoginPage/LoginPage";
 
 const Main = (props) => {
 	//console.log(props);
@@ -20,14 +21,13 @@ const Main = (props) => {
 			<section>
 				<Routes>
 					<Route path="/"
-						element={<Profile />}
-					/>
+						element={<ProfileContainer />}/>
 					<Route path="/profile/*"
-						element={<ProfileContainer />}
-					/>
+						element={<ProfileContainer />}/>
+					<Route path="/profile/:userId"
+						element={<ProfileContainer />}/>
 					<Route path="/dialogs/*"
-						element={<DialogsConteiner />}
-					/>
+						element={<DialogsConteiner />}/>
 					<Route path="/news"
 						element={<News />} />
 					<Route path="/music"
@@ -36,6 +36,8 @@ const Main = (props) => {
 						element={<Settings />} />
 					<Route path="/users"
 						element={<UsersConteiner />} />
+					<Route path="/login"
+						element={<LoginPage />} />
 				</Routes>
 			</section>
 		</main>

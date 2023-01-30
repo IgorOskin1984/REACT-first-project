@@ -4,6 +4,7 @@ import userLogo from '../../../img/user_image_png.png'
 import { NavLink } from "react-router-dom";
 
 const Users = (props) => {
+	//console.log(props);
 
 	let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 	let pages = [];
@@ -32,8 +33,15 @@ const Users = (props) => {
 					<div>
 						{
 							user.followed
-								? <button onClick={() => { props.unfollow(user.id) }}>Unfollow</button>
-								: <button onClick={() => { props.follow(user.id) }}>Follow</button>
+								? <button disabled = {props.followingInProgress.some(id => id === user.id)}
+								onClick = {() => {
+									props.unfollowThunkCreater(user.id)
+								}}>Unfollow</button>
+
+								: <button disabled = {props.followingInProgress.some(id => id === user.id)}
+								onClick = {() => {
+									props.followThunkCreater(user.id)
+								}}>Follow</button>
 						}
 					</div>
 				</div>
