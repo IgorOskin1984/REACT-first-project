@@ -7,7 +7,8 @@ import { Navigate } from "react-router-dom";
 const Profile = (props) => {
 	return (
 		<section className={style.contentBody}>
-			<ProfileInfo profile = {props.profile} />
+			<ProfileInfo profile = {props.profile} status = {props.status}
+			updateUserStatusTC = {props.updateUserStatusTC} />
 			<MyPostsContainer />
 		</section>
 

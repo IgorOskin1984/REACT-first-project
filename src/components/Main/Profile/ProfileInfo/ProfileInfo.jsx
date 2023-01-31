@@ -1,9 +1,10 @@
 import React from 'react';
 import style from './ProfileInfo.module.css';
-import logo_01 from './../../../../img/01.jpg';
+import wallpapers from './../../../../img/01.jpg';
 import smile from './../../../../img/smile.jpg'
 import Preloader from '../../../common/Preloader/Preloader';
 import { ProfileStatus } from './ProfileStatus';
+import userAvatar from './../../../../img/user_image_png.png'
 
 
 export const ProfileInfo = (props) => {
@@ -15,7 +16,7 @@ export const ProfileInfo = (props) => {
 
 	return <>
 		<div className={style.wallpapers}>
-			<img className='profile__img-img' src={logo_01}></img>
+			<img className='profile__img-img' src={wallpapers}></img>
 		</div>
 
 		{/*<section className={style.content} >*/}
@@ -23,7 +24,7 @@ export const ProfileInfo = (props) => {
 			<div className={style.profile__discription}>
 
 				<div className={style.profile__avatar}>
-					<img src={props.profile.photos.large} alt="avatar" />
+					<img src={props.profile.photos.large || userAvatar} alt='logo' />
 				</div>
 
 				<div className='profile__text-content'>
@@ -36,7 +37,7 @@ export const ProfileInfo = (props) => {
 					</div>
 				</div>
 
-				<ProfileStatus status = {'Hello world'} />
+				<ProfileStatus status = {props.status} updateUserStatus = {props.updateUserStatusTC} />
 
 
 			</div>

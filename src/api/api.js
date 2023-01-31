@@ -26,37 +26,34 @@ export const usersAPI = {
 			})
 	},
 	getProfile(userId) {
+		console.warn('Obsolete method. Please use profileAPI.getUserProfile');
+		return profileAPI.getUserProfile(userId);
+	}
+}
+
+export const profileAPI = {
+	getUserProfile(userId) {
 		return axiosInctance.get(`profile/${userId}`)
 			.then(responce => {
 				return responce = responce.data
 			})
+	},
+	getUserStatus(userId) {
+		return axiosInctance.get(`profile/status/${userId}`)
+	},
+	updateUserStatus(status) {
+		return axiosInctance.put(`profile/status`,
+		{
+			status: status
+		})
 	}
 }
 
 export const authAPI = {
-	me () {
+	me() {
 		return axiosInctance.get(`auth/me`)
 	},
-	responceUserId (responceUserId) {
+	responceUserId(responceUserId) {
 		return axiosInctance.get(`profile/${responceUserId}`)
 	}
 }
-
-
-
-
-//export const headersAuthMeApi = {
-//	getAuthMe() {
-//		return axiosInctance.get(`auth/me`)
-//			.then(responce => {
-//				debugger
-//				responce = responce.data
-//			})
-//	},
-//	getresponceUserId(responceUserId) {
-//		return axiosInctance.get(`${responceUserId}`)
-//			.then(responce => {
-//				responce = responce.data
-//			})
-//	}
-//}
