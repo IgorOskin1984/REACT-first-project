@@ -24,7 +24,9 @@ export const ProfileInfo = (props) => {
 			<div className={style.profile__discription}>
 
 				<div className={style.profile__avatar}>
-					<img src={props.profile.photos.large || userAvatar} alt='logo' />
+					<img
+					src={props.profile.photos.large || userAvatar}
+					alt='logo' />
 				</div>
 
 				<div className='profile__text-content'>
@@ -37,7 +39,13 @@ export const ProfileInfo = (props) => {
 					</div>
 				</div>
 
-				<ProfileStatus status = {props.status} updateUserStatus = {props.updateUserStatusTC} />
+				<ProfileStatus
+				//status = 'hello'
+				//
+				status = {props.status}
+				updateUserStatusTC = {props.updateUserStatusTC}
+				userPofileId = {props.userPofileId}
+				/>
 
 
 			</div>
