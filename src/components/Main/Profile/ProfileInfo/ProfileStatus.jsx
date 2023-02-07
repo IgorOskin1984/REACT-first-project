@@ -32,8 +32,6 @@ export class ProfileStatus extends React.Component {
 		})
 	}
 	componentDidUpdate(prevProps, prevState) {
-		//debugger
-		//учусь сохранять изменения
 		if(prevProps.status !== this.props.status ) {
 			this.setState({
 				status: this.props.status
@@ -42,7 +40,6 @@ export class ProfileStatus extends React.Component {
 	}
 
 	render() {
-		//console.log('render');
 		return (
 			<div>
 				{!this.state.editMode &&
