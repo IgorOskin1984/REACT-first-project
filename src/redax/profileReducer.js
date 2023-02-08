@@ -1,7 +1,6 @@
 import { profileAPI, usersAPI } from "../api/api";
 
 const ADD_POST = 'ADD-POST';
-const APDATE_NEW_POST_TEXT = 'APDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 //
 const SET_USER_STATUS = 'SET_USER_STATUS';
@@ -16,7 +15,6 @@ let initialState = {
 			postLikeCounter: '11'
 		}
 	],
-	newPostText: '',
 	profile: null,
 	userId: null,
 	//
@@ -29,22 +27,14 @@ const profilePageReducer = (state = initialState, action) => {
 	switch (action.type) {
 
 		case ADD_POST:
-
 			let newPost = {
 				id: 5,
-				text: state.newPostText,
+				text: action.newPostText,
 				postLikeCounter: 0
 			};
 			return {
 				...state,
 				postBodyData: [...state.postBodyData, newPost],
-				newPostText: ''
-			}
-
-		case APDATE_NEW_POST_TEXT:
-			return {
-				...state,
-				newPostText: action.newText
 			}
 
 		case SET_USER_PROFILE:
@@ -55,18 +45,11 @@ const profilePageReducer = (state = initialState, action) => {
 				//!
 			}
 
-
 		case SET_USER_STATUS:
 			return {
 				...state,
 				status: action.status
 			}
-
-		//case SET_STATUS:
-		//	return {
-		//		...state,
-		//		status: action.status
-		//	}
 
 		default:
 			return state;
@@ -74,19 +57,15 @@ const profilePageReducer = (state = initialState, action) => {
 }
 
 //action creaters------------------------------------------
-export const apdateNewPostTextActionCreator = (text) => {
+export const addNewPostActionCreator = (newPostText) => {
 	return {
-		type: APDATE_NEW_POST_TEXT,
-		newText: text
-	}
-}
-export const addNewPostActionCreator = () => ({ type: ADD_POST })
+		type: ADD_POST,
+		newPostText: newPostText
+	} }
 export const setUserProfile = (profile, userId) => ({ type: SET_USER_PROFILE, profile , userId})
 export const setUserStatusAC = (status) => ({ type: SET_USER_STATUS, status })
-//export const setUserStatusAC = (status) => ({ type: SET_STATUS, status })
 
 //thunk creaters------------------------------------------
-
 export const getUserProfileThunkCreator = (userId) => {
 	return (dispatch) => {
 		usersAPI.getProfile(userId)
@@ -115,27 +94,5 @@ export const updateUserStatusTC = (status) => {
 		})
 	}
 }
-
-
-
-
-
-// правильный старый код==========================================================
-
-//сокращенный синтаксис
-//export const getUserStatusTC = (userId) => (dispatch) => {
-//	profileAPI.getUserStatus(userId)
-//		.then(responce => {
-//			//debugger
-//			dispatch(setUserStatusAC(responce.data));
-//		})
-//}
-//export const updateUserStatusTC = (status) => (dispatch) => {
-//	profileAPI.updateUserStatus(status)
-//		.then(responce => {
-//			if (responce.data.resultCode === 0)
-//				dispatch(setUserStatusAC(status));
-//		})
-//}
 
 export default profilePageReducer;
