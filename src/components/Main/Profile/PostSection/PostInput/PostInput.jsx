@@ -9,7 +9,7 @@ const AddNewPostForm = (props) => {
 				<Field component='input'
 					name='profilePageForm'
 					type="text"
-					placeholder='whats new?'
+					placeholder='whats newffffffffffff?'
 					value={props.newPostText}
 					className={style.input}
 				/>
