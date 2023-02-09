@@ -1,20 +1,41 @@
 import React from "react";
+import { Field, reduxForm } from "redux-form";
+import { maxLenthCreater, required } from "../../../../../utils/validators/validators";
+import { Textarea } from "../../../../common/FormsControls/FormsControls";
 import style from './PostInput.module.css';
 
-const PostInput = (props) => {
-	//console.log(props);
+let maxLenth50 = maxLenthCreater(50)
 
+const PostInputForm = (props) => {
+	return (
+		<form onSubmit={props.handleSubmit} >
+			<div>
+				<Field
+					component={Textarea}
+					validate= {[required, maxLenth50]}
+					name ={'postFormMessage'}
+					className={style.input}
+					onChange={props.onPostChange}
+					//ref={newPostElement}
+					value={props.newPostText}
+					placeholder='whats new?'
+				/>
+			</div>
+			<button onClick={props.onClickAddPost} className='button'>Send</button>
+		</form>
+	)
+}
+
+const ReduxPostInputForm = reduxForm({form: 'profilePostForm'})(PostInputForm);
+
+const PostInput = (props) => {
+	const onAddPost = (values) => {
+		return props.onClickAddPost(values.postFormMessage)
+	}
 	return (
 		<div className='body'>
 			<h2 className={style.title}>My posts</h2>
-			<input
-				className={style.input}
-				onChange={props.onPostChange}
-				//ref={newPostElement}
-				value={props.newPostText}
-				placeholder='whats new?'
-			></input>
-			<button onClick={props.onClickAddPost} className='button'>Send</button>
+			<ReduxPostInputForm onSubmit={onAddPost} />
 		</div>
 	)
 }

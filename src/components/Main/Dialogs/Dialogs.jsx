@@ -1,6 +1,32 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import { Field, reduxForm } from "redux-form";
+import { maxLenthCreater, required } from "../../../utils/validators/validators";
+import { Textarea } from "../../common/FormsControls/FormsControls";
 import style from './Dialogs.module.css';
+
+const maxLenth5 = maxLenthCreater(5)
+
+const DialogsForm = (props) => {
+	return (
+		<form onSubmit={props.handleSubmit} >
+			<div>
+				<Field
+					component={Textarea}
+					name = {'dialogsFormMessage'}
+					validate = {[required, maxLenth5]}
+					//ref={newMessageText}
+					placeholder='type your message'
+				/>
+			</div>
+			<div>
+				<button >send message</button>
+			</div>
+		</form>
+	)
+}
+
+const ReduxDialogsForm = reduxForm({ form: 'DialogsInputForm' })(DialogsForm)
 
 const Dialogs = (props) => {
 	//console.log(props.isAuth);
@@ -9,28 +35,22 @@ const Dialogs = (props) => {
 	//	return  <Navigate to={'/login'} />
 	//}
 
+	const sendNewMessage = (values) => {
+		return props.addNewMessageCallback(values.dialogsFormMessage);
+	}
+
 	return (
 		<div>
 			<div className={style.dialogsUsersNames}>
 				<div className={style.dialogsItem}>
-					{props.dialogsElementsCreater}
+					{props.dialogsUserNameCreater}
 				</div>
-
 
 				<div className={style.messagesBlock}>
-					{props.messageItemTextCreater}
+					{props.messagesCreater}
 				</div>
 			</div>
-			<div>
-				<input
-					onChange={props.uppdateMessageTextCallback}
-					//ref={newMessageText}
-					value={props.newMesage}
-					placeholder='type your message'
-					name="" id="" cols="30" rows="3"
-				></input>
-				<button onClick={props.addNewMessageCallback}>send</button>
-			</div>
+			<ReduxDialogsForm onSubmit={sendNewMessage} />
 		</div>
 	)
 

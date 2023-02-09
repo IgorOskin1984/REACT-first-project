@@ -5,7 +5,6 @@ import style from './../Dialogs.module.css'
 const setActive = ({ isActive }) => isActive ? style.activeLink : '';
 
 const DialogItem = (props) => {
-	//console.log(props)
 	return (
 		<div>
 			<NavLink to={props.id} className={setActive}>
