@@ -1,15 +1,20 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
+import { maxLengthCreater, required } from "../../../../../utils/validators/validators";
+import { Textarea } from "../../../../common/FormsControls/FormsControls";
 import style from './PostInput.module.css';
+
+const maxLength5 = maxLengthCreater(2)
 
 const AddNewPostForm = (props) => {
 	return (
 		<form onSubmit={props.handleSubmit}>
 			<div>
-				<Field component='input'
+				<Field component={Textarea}
+					validate={[required, maxLength5]}
 					name='profilePageForm'
 					type="text"
-					placeholder='whats newffffffffffff?'
+					placeholder='whats new?'
 					value={props.newPostText}
 					className={style.input}
 				/>
