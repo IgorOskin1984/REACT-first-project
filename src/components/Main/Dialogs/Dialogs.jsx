@@ -1,11 +1,11 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
-import { maxLenthCreater, required } from "../../../utils/validators/validators";
+import { maxLengthCreater, required } from "../../../utils/validators/validators";
 import { Textarea } from "../../common/FormsControls/FormsControls";
 import style from './Dialogs.module.css';
 
-const maxLenth5 = maxLenthCreater(5)
+const maxLenth5 = maxLengthCreater(5)
 
 const DialogsForm = (props) => {
 	return (
@@ -41,8 +41,6 @@ const Dialogs = (props) => {
 
 	return (
 		<div>
-			<AddMessageFormRedux onSubmit={addNewMessage} />
-
 			<div className={style.dialogsUsersNames}>
 				<div className={style.dialogsItem}>
 					{props.dialogsUserNameCreater}
