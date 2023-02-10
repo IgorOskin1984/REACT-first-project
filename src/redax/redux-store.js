@@ -8,6 +8,7 @@ import thunkMiddleware from 'redux-thunk';
 import {reducer as formReducer} from 'redux-form';
 
 
+
 let reducers = combineReducers(
 	{
 		profilePage: profilePageReducer,

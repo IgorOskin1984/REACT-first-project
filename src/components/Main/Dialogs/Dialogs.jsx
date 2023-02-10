@@ -1,49 +1,58 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
-import { maxLengthCreater, required } from "../../../utils/validators/validators";
+import { maxLenthCreater, required } from "../../../utils/validators/validators";
 import { Textarea } from "../../common/FormsControls/FormsControls";
 import style from './Dialogs.module.css';
 
-const maxLength50 = maxLengthCreater(50)
+const maxLenth5 = maxLenthCreater(5)
 
-const AddMessageForm = (props) => {
+const DialogsForm = (props) => {
 	return (
-		<form onSubmit={props.handleSubmit}>
+		<form onSubmit={props.handleSubmit} >
 			<div>
-				<Field component={Textarea}
-					validate = {[required, maxLength50]}
-					name={'newMessageBody'}
-					placeholder={'type a message'} />
+				<Field
+					component={Textarea}
+					name = {'dialogsFormMessage'}
+					validate = {[required, maxLenth5]}
+					//ref={newMessageText}
+					placeholder='type your message'
+				/>
 			</div>
 			<div>
-				<button>send message</button>
+				<button >send message</button>
 			</div>
 		</form>
 	)
 }
-const AddMessageFormRedux = reduxForm({form: 'dialogAddMessageForm'})(AddMessageForm)
+
+const ReduxDialogsForm = reduxForm({ form: 'DialogsInputForm' })(DialogsForm)
 
 const Dialogs = (props) => {
-	if (!props.isAuth) {
-		return  <Navigate to={'/login'} />
+	//console.log(props.isAuth);
+	//debugger
+	//if (!props.isAuth) {
+	//	return  <Navigate to={'/login'} />
+	//}
+
+	const sendNewMessage = (values) => {
+		return props.addNewMessageCallback(values.dialogsFormMessage);
 	}
-	let addNewMessage = (value) =>{
-		props.addToStateNewMessage(value.newMessageBody);
-	}
+
 	return (
 		<div>
 			<AddMessageFormRedux onSubmit={addNewMessage} />
 
 			<div className={style.dialogsUsersNames}>
 				<div className={style.dialogsItem}>
-					{props.dialogsElementsCreater}
+					{props.dialogsUserNameCreater}
 				</div>
 
 				<div className={style.messagesBlock}>
-					{props.messageItemTextCreater}
+					{props.messagesCreater}
 				</div>
 			</div>
+			<ReduxDialogsForm onSubmit={sendNewMessage} />
 		</div>
 	)
 }

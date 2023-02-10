@@ -10,7 +10,7 @@ let initialState = {
 		{ id: '1', messageText: "Hello World" },
 		{ id: '2', messageText: "How are you" },
 		{ id: '3', messageText: "ok" },
-	]
+	],
 }
 
 const dialogsPageReducer = (state = initialState, action) => {
@@ -18,10 +18,9 @@ const dialogsPageReducer = (state = initialState, action) => {
 
 		case ADD_NEW_MESSAGE:{
 			let newMessage = {
-				id: '4',
-				messageText: action.newMesage
+				id: 4,
+				messageText: action.newMessage
 			}
-
 			return  {
 				...state,
 				messageItemData: [...state.messageItemData, newMessage],
@@ -32,8 +31,7 @@ const dialogsPageReducer = (state = initialState, action) => {
 			return state;
 	}
 }
-
-export const addNewMessageAC = (newMesage) => ({ type: ADD_NEW_MESSAGE, newMesage })
-
+//ActionCreators================================
+export const addNewMessageAC = (newMessage) => ({ type: ADD_NEW_MESSAGE, newMessage })
 
 export default dialogsPageReducer;

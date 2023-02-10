@@ -1,13 +1,11 @@
 import React from "react";
 import style from './../Dialogs.module.css'
 
-
-
 const MassagesItem = (props) => {
-	let message = props.text;
+	let newMessage = props.text;
 	return (
 		<div className={style.message}>
-			{message}
+			{newMessage}
 		</div>
 	)
 }

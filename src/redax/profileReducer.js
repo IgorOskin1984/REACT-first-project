@@ -6,7 +6,6 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
 //
 
-
 let initialState = {
 	postBodyData: [
 		{
@@ -38,7 +37,8 @@ const profilePageReducer = (state = initialState, action) => {
 			}
 
 		case SET_USER_PROFILE:
-			return { ...state,
+			return {
+				...state,
 				profile: action.profile,
 				//!
 				userId: action.userId
@@ -57,12 +57,13 @@ const profilePageReducer = (state = initialState, action) => {
 }
 
 //action creaters------------------------------------------
-export const addNewPostActionCreator = (newPostText) => {
+export const addNewPostActionCreator = (newPost) => {
 	return {
 		type: ADD_POST,
-		newPostText: newPostText
-	} }
-export const setUserProfile = (profile, userId) => ({ type: SET_USER_PROFILE, profile , userId})
+		newPostText: newPost
+	}
+}
+export const setUserProfile = (profile, userId) => ({ type: SET_USER_PROFILE, profile, userId })
 export const setUserStatusAC = (status) => ({ type: SET_USER_STATUS, status })
 
 //thunk creaters------------------------------------------
@@ -87,11 +88,11 @@ export const getUserStatusTC = (userId) => {
 export const updateUserStatusTC = (status) => {
 	return (dispatch) => {
 		profileAPI.updateUserStatus(status)
-		.then(responce => {
-			if(responce.data.resultCode === 0){
-				dispatch(setUserStatusAC(status))
-			}
-		})
+			.then(responce => {
+				if (responce.data.resultCode === 0) {
+					dispatch(setUserStatusAC(status))
+				}
+			})
 	}
 }
 
