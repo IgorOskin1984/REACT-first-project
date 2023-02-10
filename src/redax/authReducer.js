@@ -19,11 +19,10 @@ const authReducer = (state = initialState, action) => {
 		case SET_USER_DATA: {
 			return {
 				...state,
-				...action.data,
-				isAuth: true,
+				...action.payload
 			}
 		}
-		
+
 		case SET_LOGIN_IN_USER_PROFILE_DATA: {
 			return {
 				...state,
@@ -43,7 +42,7 @@ const authReducer = (state = initialState, action) => {
 	}
 }
 
-export const setAuthUserDataAC = (userId, email, login) => ({ type: SET_USER_DATA, data: { userId, email, login } })
+export const setAuthUserDataAC = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, payload: { userId, email, login, isAuth } })
 export const setLoginInUserProfileDataAC = (profileData) => {
 	return {
 		type: SET_LOGIN_IN_USER_PROFILE_DATA,
@@ -55,21 +54,34 @@ export const setLoginInUserContactsAC = (loginInUserContacts) => ({ type: SET_LO
 //thunk=========================================
 
 export const getAuthUserData = () => (dispatch) => {
-	let responceUserId;
 	authAPI.me()
 		.then(responce => {
 			if (responce.data.resultCode === 0) {
 				let { id, email, login } = responce.data.data;
-				responceUserId = responce.data.data.id;
-
-				dispatch(setAuthUserDataAC(id, email, login));
-				if (responceUserId) {
-					authAPI.responceUserId(responceUserId)
-						.then(responceProfileData => {
-							dispatch(setLoginInUserProfileDataAC(responceProfileData.data));
-							dispatch(setLoginInUserContactsAC(responceProfileData.data.contacts));
-						})
+				dispatch(setAuthUserDataAC(id, email, login, true));
+				if (id) {
+					authAPI.responceUserId(id)
+					.then(responceProfileData => {
+						dispatch(setLoginInUserProfileDataAC(responceProfileData.data));
+						dispatch(setLoginInUserContactsAC(responceProfileData.data.contacts));
+					})
 				}
+			}
+		})
+}
+export const loginTC = (email, password, rememberMe) => (dispatch) => {
+	authAPI.login(email, password, rememberMe)
+		.then(responce => {
+			if (responce.data.resultCode === 0) {
+				dispatch(getAuthUserData());
+			}
+		})
+}
+export const logoutTC = () => (dispatch) => {
+	authAPI.logout()
+		.then(responce => {
+			if (responce.data.resultCode === 0) {
+				dispatch(setAuthUserDataAC(null, null, null, false));
 			}
 		})
 }
