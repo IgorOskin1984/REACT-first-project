@@ -33,36 +33,19 @@ export const usersAPI = {
 
 export const profileAPI = {
 	getUserProfile(userId) {
-	return axiosInctance.get(`profile/${userId}`)
-		.then(responce => {
-			return responce = responce.data
-		})
-},
+		return axiosInctance.get(`profile/${userId}`)
+			.then(responce => {
+				return responce = responce.data
+			})
+	},
 	getUserStatus(userId) {
 		return axiosInctance.get(`profile/status/${userId}`)
 	},
 	updateUserStatus(newStatus) {
 		return axiosInctance.put(`profile/status`,
-		{status: newStatus});
+			{ status: newStatus });
 	}
 }
-
-//export const profileAPI = {
-
-
-
-//	getUserStatus(userId) {
-//		return axiosInctance.get(`profile/status/${userId}`)
-//	},
-
-
-//	updateUserStatus(status) {
-//		return axiosInctance.put(`profile/status`,
-//		{
-//			status: status
-//		})
-//	}
-//}
 
 export const authAPI = {
 	me() {
@@ -70,5 +53,11 @@ export const authAPI = {
 	},
 	responceUserId(responceUserId) {
 		return axiosInctance.get(`profile/${responceUserId}`)
+	},
+	login(email, password, rememberMe = false) {
+		return axiosInctance.post(`auth/login`, {email, password, rememberMe})
+	},
+	logout() {
+		return axiosInctance.delete(`auth/login`);
 	}
 }
