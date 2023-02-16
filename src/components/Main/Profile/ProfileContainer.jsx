@@ -7,7 +7,7 @@ import {
 	getUserProfileThunkCreator
 } from './../../../redax/profileReducer'
 import { useParams } from "react-router-dom";
-import { withAuthRedirect } from "../../../hoc/withAuthRedirectNavigate";
+//import { withAuthRedirect } from "../../../hoc/withAuthRedirectNavigate";
 import { compose } from "redux";
 
 
@@ -65,5 +65,5 @@ export default compose(
 			//
 		}),
 	withRouter,
-	withAuthRedirect
+	//withAuthRedirect
 	)(ProfileContainer)
