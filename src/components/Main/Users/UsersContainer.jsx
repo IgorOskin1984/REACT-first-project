@@ -9,7 +9,7 @@ import {
 } from '../../../redax/usersReducer';
 import Users from './Users';
 import Preloader from '../../common/Preloader/Preloader';
-import { withAuthRedirect } from '../../../hoc/withAuthRedirectNavigate';
+//import { withAuthRedirect } from '../../../hoc/withAuthRedirectNavigate';
 import { compose } from 'redux';
 
 class UsersContainer extends React.Component {
@@ -81,5 +81,5 @@ export default compose(
 			toogleFollowingProgress,
 			getUsersThunkCreator, onPageChangedThunkCreater, unfollowThunkCreater, followThunkCreater
 		}),
-	withAuthRedirect
+	//withAuthRedirect
 )(UsersContainer)

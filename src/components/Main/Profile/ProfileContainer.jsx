@@ -7,7 +7,7 @@ import {
 	getUserProfileThunkCreator
 } from './../../../redax/profileReducer'
 import { useParams } from "react-router-dom";
-//import { withAuthRedirect } from "../../../hoc/withAuthRedirectNavigate";
+import { withAuthRedirect } from "../../../hoc/withAuthRedirectNavigate";
 import { compose } from "redux";
 
 
@@ -25,6 +25,10 @@ class ProfileContainer extends React.Component {
 		if (!userId) {
 			//userId = 27516;
 			userId = this.props.autorizedUserId;
+			//! у меня нет this.props.history
+			//if(!userId) {
+			//	this.props.history.push('/login')
+			//}
 		}
 		this.props.getUserProfileThunkCreator(userId)
 		//
@@ -65,5 +69,5 @@ export default compose(
 			//
 		}),
 	withRouter,
-	//withAuthRedirect
+	withAuthRedirect
 	)(ProfileContainer)

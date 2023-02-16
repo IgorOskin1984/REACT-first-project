@@ -2,20 +2,39 @@ import './App.css';
 import Main from './components/Main/Main';
 import Footer from './components/Footer/Footer';
 import HeaderContainer from './components/Header/HeaderContainer';
+import { Component } from 'react';
+import { connect } from 'react-redux';
+import {setInitialSuccessTC} from './redax/appReducer'
+import Preloader from './components/common/Preloader/Preloader';
 
 
 
-const App = (props) => {
-	//console.log(props);
+class App extends Component {
+	constructor(props) {
+		super(props);
+	}
 
-	return (
-		<div className='wrapper'>
+	componentDidMount() {
+		this.props.setInitialSuccessTC()
+	}
+
+	render() {
+
+		if(!this.props.autorizedSuccess) {
+			return <Preloader/>
+		}
+
+		return (<div className='wrapper'>
 			<HeaderContainer />
 			<Main />
 			<Footer />
-		</div>
-	)
+		</div>);
+	}
+
 }
 
+const mapStateToProps = (state) => ({
+	autorizedSuccess: state.app.initialedSuccess
+})
 
-export default App;
+export default connect(mapStateToProps, {setInitialSuccessTC}) (App);

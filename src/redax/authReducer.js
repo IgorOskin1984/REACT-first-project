@@ -55,7 +55,7 @@ export const setLoginInUserContactsAC = (loginInUserContacts) => ({ type: SET_LO
 //thunk=========================================
 
 export const getAuthUserData = () => (dispatch) => {
-	authAPI.me()
+	return authAPI.me()
 		.then(responce => {
 			if (responce.data.resultCode === 0) {
 				let { id, email, login } = responce.data.data;
@@ -70,6 +70,7 @@ export const getAuthUserData = () => (dispatch) => {
 			}
 		})
 }
+
 export const loginTC = (email, password, rememberMe) => (dispatch) => {
 	authAPI.login(email, password, rememberMe)
 		.then(responce => {
