@@ -21,6 +21,7 @@ const authReducer = (state = initialState, action) => {
 			return {
 				...state,
 				...action.payload
+				...action.payload
 			}
 		}
 
@@ -44,6 +45,7 @@ const authReducer = (state = initialState, action) => {
 }
 
 export const setAuthUserDataAC = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, payload: { userId, email, login, isAuth } })
+export const setAuthUserDataAC = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, payload: { userId, email, login, isAuth } })
 export const setLoginInUserProfileDataAC = (profileData) => {
 	return {
 		type: SET_LOGIN_IN_USER_PROFILE_DATA,
@@ -59,6 +61,13 @@ export const getAuthUserData = () => (dispatch) => {
 		.then(responce => {
 			if (responce.data.resultCode === 0) {
 				let { id, email, login } = responce.data.data;
+				dispatch(setAuthUserDataAC(id, email, login, true));
+				if (id) {
+					authAPI.responceUserId(id)
+					.then(responceProfileData => {
+						dispatch(setLoginInUserProfileDataAC(responceProfileData.data));
+						dispatch(setLoginInUserContactsAC(responceProfileData.data.contacts));
+					})
 				dispatch(setAuthUserDataAC(id, email, login, true));
 				if (id) {
 					authAPI.responceUserId(id)
