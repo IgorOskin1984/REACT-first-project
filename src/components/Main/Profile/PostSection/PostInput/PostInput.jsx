@@ -29,7 +29,7 @@ const ProfilePageFormRedux = reduxForm({ form: 'ProfileAddNewPostForm'})(AddNewP
 
 const PostInput = (props) => {
 	const onAddPost = (values) => {
-		return props.onClickAddPost(values.postFormMessage)
+		return props.onClickAddPost(values.profilePageForm)
 	}
 	return (
 		<div className='body'>
