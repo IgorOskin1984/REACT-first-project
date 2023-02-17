@@ -4,37 +4,42 @@ import Footer from './components/Footer/Footer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import {setInitialSuccessTC} from './redax/appReducer'
+import { autoficationTC } from './redax/appReducer'
+import { compose } from 'redux';
+import { withRouter } from './components/Main/Profile/ProfileContainer';
 import Preloader from './components/common/Preloader/Preloader';
 
 
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-	}
+	//constructor(props) {
+	//	super(props);
+	//}
 
 	componentDidMount() {
-		this.props.setInitialSuccessTC()
+		this.props.autoficationTC()
 	}
 
 	render() {
-
-		if(!this.props.autorizedSuccess) {
+		if (!this.props.initializedSuccess) {
 			return <Preloader/>
 		}
-
-		return (<div className='wrapper'>
-			<HeaderContainer />
-			<Main />
-			<Footer />
-		</div>);
+			return (<div className='wrapper'>
+				<HeaderContainer />
+				<Main />
+				<Footer />
+			</div>);
 	}
 
 }
 
-const mapStateToProps = (state) => ({
-	autorizedSuccess: state.app.initialedSuccess
-})
+const mapStateToProps = (state) => {
+	return {
+		initializedSuccess: state.app.initializedSuccess
+	}
+}
 
-export default connect(mapStateToProps, {setInitialSuccessTC}) (App);
+export default compose(
+	withRouter,
+	connect(mapStateToProps, { autoficationTC })
+)(App);
