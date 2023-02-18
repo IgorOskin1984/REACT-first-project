@@ -13,12 +13,12 @@ import Preloader from '../../common/Preloader/Preloader';
 import { compose } from 'redux';
 import {
 	getCurrentPage,
+	getFollowingInProgress,
+	getIsFetching,
 	getPageSize,
 	getTotalUsersCount,
-	getUsers,
-	getIsFetching,
-	getIsFollowingInProgress
-} from '../../../redax/selectors/userSelector';
+	getUsers
+} from '../../../redax/selectors/usersSelectors';
 
 class UsersContainer extends React.Component {
 
@@ -67,7 +67,7 @@ let mapStateToProps = (state) => {
 		totalUsersCount: getTotalUsersCount(state),
 		currentPage: getCurrentPage(state),
 		isFetching: getIsFetching(state),
-		followingInProgress: getIsFollowingInProgress(state)
+		followingInProgress: getFollowingInProgress(state),
 	}
 }
 //let mapDispatchToProps = (dispatch) => {
