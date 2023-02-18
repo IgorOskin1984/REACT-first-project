@@ -1,4 +1,8 @@
-import React, { useState, useRef } from "react";
+import React,
+{
+	useState,
+	useEffect
+} from "react";
 import { authAPI } from "../../../../api/api";
 import style from './ProfileInfo.module.css';
 
@@ -8,6 +12,9 @@ export const ProfileStatusWithHooks = (props) => {
 
 	const [editMode, setEditMode] = useState(false)
 	const [status, setStatus] = useState(props.status)
+	useEffect(() => {
+		setStatus(props.status)
+	}, [props.status])
 
 	const activateEditMode = () => {
 		if (props.autorizedUserId === props.currentProfileUserId) setEditMode(true)
