@@ -90,10 +90,12 @@ export const setUsersTotalCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_
 export const toogleIsFetching = (isFetching) => ({ type: TOOGLE_IS_FETCHING, isFetching })
 export const toogleFollowingProgress = (isFetching, userId) => ({ type: TOOGLE_IS_FOLLOWING_PROGRESS, isFetching, userId })
 //thunk ================================================================
-export const getUsersThunkCreator = (currentPage, pageSize) => {
+export const getUsersThunkCreator = (page, pageSize) => {
 	return (dispatch) => {
 		dispatch(toogleIsFetching(true))
-		usersAPI.getUsers(currentPage, pageSize)
+		//dispatch(setCurrentPage(page))
+		//!оно у меня до этого работало
+		usersAPI.getUsers(page, pageSize)
 			.then(data => {
 				dispatch(toogleIsFetching(false))
 				dispatch(setUsers(data.items))
