@@ -5,9 +5,12 @@ import smile from './../../../../img/smile.jpg'
 import Preloader from '../../../common/Preloader/Preloader';
 import { ProfileStatus } from './ProfileStatus';
 import userAvatar from './../../../../img/user_image_png.png'
+import { ProfileStatusWithHooks } from './ProfileStatusWithHooks';
 
 
 export const ProfileInfo = (props) => {
+
+	//console.log(props);
 
 	if (!props.profile) {
 		return <Preloader/>
@@ -39,12 +42,13 @@ export const ProfileInfo = (props) => {
 					</div>
 				</div>
 
-				<ProfileStatus
+				<ProfileStatusWithHooks
 				//status = 'hello'
 				//
 				status = {props.status}
 				updateUserStatusTC = {props.updateUserStatusTC}
-				userPofileId = {props.userPofileId}
+				autorizedUserId = {props.autorizedUserId}
+				currentProfileUserId = {props.profile.userId}
 				/>
 
 
