@@ -16,7 +16,6 @@ export const ProfileInfo = (props) => {
 		return <Preloader/>
 	}
 
-
 	return <>
 		<div className={style.wallpapers}>
 			<img className='profile__img-img' src={wallpapers}></img>
@@ -47,8 +46,8 @@ export const ProfileInfo = (props) => {
 				//
 				status = {props.status}
 				updateUserStatusTC = {props.updateUserStatusTC}
-				autorizedUserId = {props.autorizedUserId}
-				currentProfileUserId = {props.profile.userId}
+				currentUserPofileId = {props.profile.userId}
+				autorizedUserId={props.autorizedUserId}
 				/>
 
 

@@ -8,7 +8,7 @@ import PostBodyContainer from "./PostSection/PostBody/PostBodyContainer";
 //!наверно надо сделать Navigate
 
 const Profile = (props) => {
-	//console.log(props);
+
 	return (
 		<section className={style.contentBody}>
 			<ProfileInfo
