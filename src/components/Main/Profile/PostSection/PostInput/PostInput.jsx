@@ -6,7 +6,7 @@ import style from './PostInput.module.css';
 
 const maxLength50 = maxLengthCreater(50)
 
-const AddNewPostForm = (props) => {
+const AddNewPostForm =  (props) => {
 	return (
 		<form onSubmit={props.handleSubmit}>
 			<div>
@@ -28,6 +28,8 @@ const AddNewPostForm = (props) => {
 const ProfilePageFormRedux = reduxForm({ form: 'ProfileAddNewPostForm'})(AddNewPostForm)
 
 const PostInput = (props) => {
+
+	console.log('RENDER PostInput');
 	const onAddPost = (values) => {
 		return props.onClickAddPost(values.profilePageForm)
 	}

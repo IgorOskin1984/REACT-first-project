@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from './ProfileInfo.module.css';
 
-export const ProfileStatusWithHooks = (props) => {
-
-	console.log(props);
+export const ProfileStatusWithHooks = React.memo( (props) => {
 
 	const [editMode, setEditMode] = useState(false);
 	const [status, setStatus] = useState(props.status);
@@ -45,4 +43,4 @@ export const ProfileStatusWithHooks = (props) => {
 			}
 		</div>
 	)
-}
+});
