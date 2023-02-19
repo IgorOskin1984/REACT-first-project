@@ -8,13 +8,14 @@ import PostBodyContainer from "./PostSection/PostBody/PostBodyContainer";
 //!наверно надо сделать Navigate
 
 const Profile = (props) => {
+
 	return (
 		<section className={style.contentBody}>
 			<ProfileInfo
 				profile={props.profile}
 				status={props.status}
 				updateUserStatusTC={props.updateUserStatusTC}
-				userPofileId={props.userPofileId}
+				autorizedUserId={props.autorizedUserId}
 			/>
 			<div>
 				<PostInputContainer />

@@ -5,6 +5,7 @@ import smile from './../../../../img/smile.jpg'
 import Preloader from '../../../common/Preloader/Preloader';
 import { ProfileStatus } from './ProfileStatus';
 import userAvatar from './../../../../img/user_image_png.png'
+import { ProfileStatusWithHooks } from './ProfileStatusWithHooks';
 
 
 export const ProfileInfo = (props) => {
@@ -12,7 +13,6 @@ export const ProfileInfo = (props) => {
 	if (!props.profile) {
 		return <Preloader/>
 	}
-
 
 	return <>
 		<div className={style.wallpapers}>
@@ -39,12 +39,13 @@ export const ProfileInfo = (props) => {
 					</div>
 				</div>
 
-				<ProfileStatus
+				<ProfileStatusWithHooks
 				//status = 'hello'
 				//
 				status = {props.status}
 				updateUserStatusTC = {props.updateUserStatusTC}
-				userPofileId = {props.userPofileId}
+				currentUserPofileId = {props.profile.userId}
+				autorizedUserId={props.autorizedUserId}
 				/>
 
 
