@@ -28,8 +28,6 @@ const AddNewPostForm =  (props) => {
 const ProfilePageFormRedux = reduxForm({ form: 'ProfileAddNewPostForm'})(AddNewPostForm)
 
 const PostInput = (props) => {
-
-	console.log('RENDER PostInput');
 	const onAddPost = (values) => {
 		return props.onClickAddPost(values.profilePageForm)
 	}

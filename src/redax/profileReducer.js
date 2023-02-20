@@ -2,9 +2,7 @@ import { profileAPI, usersAPI } from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
-//
 const SET_USER_STATUS = 'SET_USER_STATUS';
-//
 
 let initialState = {
 	postBodyData: [
@@ -57,10 +55,10 @@ const profilePageReducer = (state = initialState, action) => {
 }
 
 //action creaters------------------------------------------
-export const addNewPostActionCreator = (newPost) => {
+export const addNewPostActionCreator = (text) => {
 	return {
 		type: ADD_POST,
-		newPostText: newPost
+		newPostText: text
 	}
 }
 export const setUserProfile = (profile, userId) => ({ type: SET_USER_PROFILE, profile, userId })
