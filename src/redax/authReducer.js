@@ -1,9 +1,9 @@
 import { stopSubmit } from "redux-form";
 import { authAPI } from "../api/api";
 
-const SET_USER_DATA = 'SET_USER_DATA';
-const SET_LOGIN_IN_USER_PROFILE_DATA = 'SET_LOGIN_IN_USER_PROFILE_DATA';
-const SET_LOGIN_IN_USER_CONTACTS = 'SET_LOGIN_IN_USER_CONTACTS';
+const SET_USER_DATA = 'React-Course-network/auth/SET_USER_DATA';
+const SET_LOGIN_IN_USER_PROFILE_DATA = 'React-Course-network/auth/SET_LOGIN_IN_USER_PROFILE_DATA';
+const SET_LOGIN_IN_USER_CONTACTS = 'React-Course-network/auth/SET_LOGIN_IN_USER_CONTACTS';
 
 
 let initialState = {
@@ -54,44 +54,32 @@ export const setLoginInUserContactsAC = (loginInUserContacts) => ({ type: SET_LO
 
 //thunk=========================================
 
-export const getAuthUserData = () => (dispatch) => {
-	return authAPI.me()
-		.then(responce => {
-			if (responce.data.resultCode === 0) {
-				let { id, email, login } = responce.data.data;
-				dispatch(setAuthUserDataAC(id, email, login, true));
-				if (id) {
-					authAPI.responceUserId(id)
-					.then(responceProfileData => {
-						dispatch(setLoginInUserProfileDataAC(responceProfileData.data));
-						dispatch(setLoginInUserContactsAC(responceProfileData.data.contacts));
-					})
-				}
-			}
-		})
+export const getAuthUserData = () => async (dispatch) => {
+	const responce = await authAPI.me();
+	if (responce.data.resultCode === 0) {
+		let { id, email, login } = responce.data.data;
+		dispatch(setAuthUserDataAC(id, email, login, true));
+		if (id) {
+			const responceProfileData = await authAPI.responceUserId(id)
+			dispatch(setLoginInUserProfileDataAC(responceProfileData.data));
+			dispatch(setLoginInUserContactsAC(responceProfileData.data.contacts));
+		}
+	}
 }
-
-export const loginTC = (email, password, rememberMe) => (dispatch) => {
-	authAPI.login(email, password, rememberMe)
-		.then(responce => {
-			if (responce.data.resultCode === 0) {
-				dispatch(getAuthUserData());
-			} else {
-				let message = responce.data.messages.length > 0 ? responce.data.messages : 'some error'
-				dispatch(stopSubmit('loginForma', {_error: message}))
-			}
-		})
+export const loginTC = (email, password, rememberMe) => async (dispatch) => {
+	const responce = await authAPI.login(email, password, rememberMe)
+	if (responce.data.resultCode === 0) {
+		dispatch(getAuthUserData());
+	} else {
+		let message = responce.data.messages.length > 0 ? responce.data.messages : 'some error'
+		dispatch(stopSubmit('loginForma', { _error: message }))
+	}
 }
-export const logoutTC = () => (dispatch) => {
-	authAPI.logout()
-		.then(responce => {
-			if (responce.data.resultCode === 0) {
-				dispatch(setAuthUserDataAC(null, null, null, false));
-			}
-		})
+export const logoutTC = () => async (dispatch) => {
+	const responce = await authAPI.logout()
+	if (responce.data.resultCode === 0) {
+		dispatch(setAuthUserDataAC(null, null, null, false));
+	}
 }
-
-
-
 
 export default authReducer;

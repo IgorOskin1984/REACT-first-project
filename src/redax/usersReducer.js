@@ -1,4 +1,5 @@
 import { usersAPI } from "../api/api";
+import { updateObjectInArray } from "../utils/object-helpers";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -20,33 +21,16 @@ let initialState = {
 
 const usersPageReducer = (state = initialState, action) => {
 	switch (action.type) {
-
 		case FOLLOW:
 			return {
 				...state,
-				users: state.users.map(user => {
-					if (user.id === action.userId) {
-						return {
-							...user,
-							followed: true
-						}
-					}
-					return user
-				})
+				users: updateObjectInArray(state.users, action.userId, 'id', {followed: true})
 			}
 
 		case UNFOLLOW:
 			return {
 				...state,
-				users: state.users.map(user => {
-					if (user.id === action.userId) {
-						return {
-							...user,
-							followed: false
-						}
-					}
-					return user
-				})
+				users: updateObjectInArray(state.users, action.userId, 'id', {followed: false})
 			}
 
 		case SET_USERS:
@@ -81,7 +65,7 @@ const usersPageReducer = (state = initialState, action) => {
 			return state;
 	}
 }
-
+//AC========================================
 export const follow = (userId) => ({ type: FOLLOW, userId })
 export const unfollow = (userId) => ({ type: UNFOLLOW, userId })
 export const setUsers = (users) => ({ type: SET_USERS, users })
@@ -91,54 +75,49 @@ export const toogleIsFetching = (isFetching) => ({ type: TOOGLE_IS_FETCHING, isF
 export const toogleFollowingProgress = (isFetching, userId) => ({ type: TOOGLE_IS_FOLLOWING_PROGRESS, isFetching, userId })
 //thunk ================================================================
 export const getUsersThunkCreator = (page, pageSize) => {
-	return (dispatch) => {
+	return async (dispatch) => {
 		dispatch(toogleIsFetching(true))
-		//dispatch(setCurrentPage(page))
 		//!оно у меня до этого работало
-		usersAPI.getUsers(page, pageSize)
-			.then(data => {
-				dispatch(toogleIsFetching(false))
-				dispatch(setUsers(data.items))
-				dispatch(setUsersTotalCount(data.totalCount))
-			})
+		//dispatch(setCurrentPage(page))
+		const data = await usersAPI.getUsers(page, pageSize)
+		dispatch(toogleIsFetching(false))
+		dispatch(setUsers(data.items))
+		dispatch(setUsersTotalCount(data.totalCount))
 	}
 }
 
-export const onPageChangedThunkCreater = (pageNumber, pageSize) => {
-	return (dispatch) => {
-		dispatch(toogleIsFetching(true))
-		dispatch(setCurrentPage(pageNumber));
-		usersAPI.getUsers(pageNumber, pageSize)
-			.then(data => {
-				dispatch(toogleIsFetching(false));
-				dispatch(setUsers(data.items));
-			})
-	}
+export const onPageChangedThunkCreater = (pageNumber, pageSize) => async (dispatch) => {
+	dispatch(toogleIsFetching(true));
+	dispatch(setCurrentPage(pageNumber));
+
+	const data = await usersAPI.getUsers(pageNumber, pageSize)
+	dispatch(toogleIsFetching(false));
+	dispatch(setUsers(data.items));
+}
+
+//*код ниже - пример рефакторинга 2 функций с дублируещимся кодом
+
+const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreater ) => {
+	dispatch(toogleFollowingProgress(true, userId));		
+		const data = await apiMethod(userId)
+		if (data.resultCode === 0) {
+			dispatch(actionCreater(userId))
+		}
+		dispatch(toogleFollowingProgress(false, userId));
 }
 
 export const unfollowThunkCreater = (userId) => {
-	return (dispatch) => {
-		dispatch(toogleFollowingProgress(true, userId));
-		usersAPI.unfollowAPI(userId)
-			.then(data => {
-				if (data.resultCode === 0) {
-					dispatch(unfollow(userId))
-				}
-				dispatch(toogleFollowingProgress(false, userId));
-			})
+	return async (dispatch) => {
+		let apiMethod = usersAPI.unfollowAPI;
+		let actionCreater = unfollow;
+
+		followUnfollowFlow(dispatch, userId, apiMethod, actionCreater);
 	}
 }
-
+//*здесь сделано все то же, что и выше, но без лишних переменных 
 export const followThunkCreater = (userId) => {
-	return (dispatch) => {
-		dispatch(toogleFollowingProgress(true, userId));
-		usersAPI.followAPI(userId)
-			.then(data => {
-				if (data.resultCode === 0) {
-					dispatch(follow(userId))
-				}
-				dispatch(toogleFollowingProgress(false, userId));
-			})
+	return async (dispatch) => {
+		followUnfollowFlow(dispatch, userId, usersAPI.followAPI, follow);
 	}
 }
 

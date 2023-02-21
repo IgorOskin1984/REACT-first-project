@@ -1,6 +1,6 @@
 import { getAuthUserData } from "./authReducer";
 
-const SET_INITIALIZED_SUCCESS = 'SET_INITIALIZED_SUCCESS'
+const SET_INITIALIZED_SUCCESS = 'React-Course-network/app/SET_INITIALIZED_SUCCESS'
 
 let initialState = {
 	initializedSuccess: false
@@ -14,7 +14,7 @@ export const appReducer = (state = initialState, action) => {
 				initializedSuccess: true
 			}
 		}
-	
+
 		default: {
 			return state;
 		}
@@ -22,12 +22,17 @@ export const appReducer = (state = initialState, action) => {
 }
 
 //AC
-const setInitializedSuccessAC = () => ({type: SET_INITIALIZED_SUCCESS});
+const setInitializedSuccessAC = () => ({ type: SET_INITIALIZED_SUCCESS });
 //TC
-export const autoficationTC = () => (dispatch)  => {
-	let promise = dispatch(getAuthUserData());
+export const autoficationTC = () => async (dispatch) => {
+	let promise = await dispatch(getAuthUserData());
 	Promise.all([promise])
-	.then(()=> {
-		dispatch(setInitializedSuccessAC())
-	})
+	dispatch(setInitializedSuccessAC())
 }
+//export const autoficationTC = () => (dispatch)  => {
+//	let promise = dispatch(getAuthUserData());
+//	Promise.all([promise])
+//	.then(()=> {
+//		dispatch(setInitializedSuccessAC())
+//	})
+//}
