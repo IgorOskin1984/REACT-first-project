@@ -15,7 +15,7 @@ let mapStateToProps = (state) => {
 			return <DialogsUserName name={data.name} id={data.id} isAuth = {data.isAuth} />
 		}),
 		messagesCreater: state.dialogsPage.messageItemData.map((data) => {
-			return <MassagesItem text={data.messageText} />
+			return <MassagesItem newMessage={data.messageText} />
 		})
 	}
 }

@@ -6,16 +6,16 @@ import style from './PostInput.module.css';
 
 const maxLength50 = maxLengthCreater(50)
 
-const AddNewPostForm =  (props) => {
+const AddNewPostForm =  ({handleSubmit, newPostText}) => {
 	return (
-		<form onSubmit={props.handleSubmit}>
+		<form onSubmit={handleSubmit}>
 			<div>
 				<Field component={Textarea}
 					validate={[required, maxLength50]}
 					name='profilePageForm'
 					type="text"
 					placeholder='whats new?'
-					value={props.newPostText}
+					value={newPostText}
 					className={style.input}
 				/>
 			</div>
@@ -27,9 +27,9 @@ const AddNewPostForm =  (props) => {
 }
 const ProfilePageFormRedux = reduxForm({ form: 'ProfileAddNewPostForm'})(AddNewPostForm)
 
-const PostInput = (props) => {
+const PostInput = ({onClickAddPost}) => {
 	const onAddPost = (values) => {
-		return props.onClickAddPost(values.profilePageForm)
+		return onClickAddPost(values.profilePageForm)
 	}
 	return (
 		<div className='body'>

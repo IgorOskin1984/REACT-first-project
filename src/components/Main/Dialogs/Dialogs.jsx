@@ -7,9 +7,9 @@ import style from './Dialogs.module.css';
 
 const maxLenth5 = maxLengthCreater(5)
 
-const DialogsForm = (props) => {
+const DialogsForm = ({handleSubmit}) => {
 	return (
-		<form onSubmit={props.handleSubmit} >
+		<form onSubmit={handleSubmit} >
 			<div>
 				<Field
 					component={Textarea}
@@ -28,7 +28,7 @@ const DialogsForm = (props) => {
 
 const ReduxDialogsForm = reduxForm({ form: 'DialogsInputForm' })(DialogsForm)
 
-const Dialogs = (props) => {
+const Dialogs = ({addNewMessageCallback, dialogsUserNameCreater, messagesCreater}) => {
 	//console.log(props.isAuth);
 	//debugger
 	//if (!props.isAuth) {
@@ -36,18 +36,18 @@ const Dialogs = (props) => {
 	//}
 
 	const sendNewMessage = (values) => {
-		return props.addNewMessageCallback(values.dialogsFormMessage);
+		return addNewMessageCallback(values.dialogsFormMessage);
 	}
 
 	return (
 		<div>
 			<div className={style.dialogsUsersNames}>
 				<div className={style.dialogsItem}>
-					{props.dialogsUserNameCreater}
+					{dialogsUserNameCreater}
 				</div>
 
 				<div className={style.messagesBlock}>
-					{props.messagesCreater}
+					{messagesCreater}
 				</div>
 			</div>
 			<ReduxDialogsForm onSubmit={sendNewMessage} />

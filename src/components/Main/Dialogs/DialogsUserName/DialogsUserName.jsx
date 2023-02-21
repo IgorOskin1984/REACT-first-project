@@ -4,11 +4,11 @@ import style from './../Dialogs.module.css'
 
 const setActive = ({ isActive }) => isActive ? style.activeLink : '';
 
-const DialogItem = (props) => {
+const DialogItem = ({id, name }) => {
 	return (
 		<div>
-			<NavLink to={props.id} className={setActive}>
-				{props.name}
+			<NavLink to={id} className={setActive}>
+				{name}
 			</NavLink>
 		</div>
 	)

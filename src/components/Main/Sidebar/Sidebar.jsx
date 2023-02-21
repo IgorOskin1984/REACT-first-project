@@ -4,7 +4,7 @@ import style from './Sidebar.module.css';
 import SideFriend from "./SideFriend";
 
 
-const Sidebar = () => {
+const Sidebar = (prpos) => {
 	return (
 		<aside className={`${style.main__sidebar} ${style.sidebar}`}>
 			<nav className={style.sidebar__menu}>

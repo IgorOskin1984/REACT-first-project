@@ -1,46 +1,32 @@
-import React from "react";
-import Post_item from './Post_Item/Post_item'
-import PostBody from './PostBody'
+import React, { Component } from "react";
 import { connect } from "react-redux";
+import style from './PostBody.module.css';
+import Post_item from "./Post_Item/Post_item";
 
 
+class PostBodyContainer extends Component {
+	//constructor(props) {
+	//	super(props);
+	//}
 
-//const PostBodyContainer = (props) => {
+	render() {
+		let postElementsCreater = this.props.postBodyData.map(data => {
+			return <Post_item
+				postText={data.text}
+				postLike={data.postLikeCounter}
+				footerText={'it is posts footer'} />;
+		});
+		return (<div className={style.postBody}>
+			{postElementsCreater}
+		</div>);
+	}
 
-
-//	return (
-//		<StoreContext.Consumer>
-//			{(store) => {
-//				let postElementsCreater = store.getState().profilePage.postBodyData.map((data) => {
-//					return (
-//						<Post_item
-//							postText={data.text}
-//							postLike={data.postLikeCounter}
-//							footerText={'it is posts footer'}
-//						/>
-//					)
-//				})
-//				return (
-//					<PostBody postElementsCreater={postElementsCreater} />
-//				)
-//			}
-//			}
-
-//		</StoreContext.Consumer>
-//	)
-//}
+}
 
 let mapStateToProps = (state) => {
 	return {
-		state: state
-	}
-}
-let mapDispatchToProps = () => {
-	return {
+		postBodyData: state.profilePage.postBodyData
 	}
 }
 
-
-const PostBodyContainer = connect(mapStateToProps, mapDispatchToProps)(PostBody)
-
-export default PostBodyContainer;
+export default connect(mapStateToProps, null)(PostBodyContainer);

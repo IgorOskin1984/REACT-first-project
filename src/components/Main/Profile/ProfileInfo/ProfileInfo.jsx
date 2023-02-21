@@ -1,18 +1,16 @@
 import React from 'react';
 import style from './ProfileInfo.module.css';
 import wallpapers from './../../../../img/01.jpg';
-import smile from './../../../../img/smile.jpg'
 import Preloader from '../../../common/Preloader/Preloader';
-import { ProfileStatus } from './ProfileStatus';
 import userAvatar from './../../../../img/user_image_png.png'
 import { ProfileStatusWithHooks } from './ProfileStatusWithHooks';
 
 
-export const ProfileInfo = (props) => {
+export const ProfileInfo = ({profile, status, updateUserStatusTC, autorizedUserId}) => {
 
 	//console.log(props);
 
-	if (!props.profile) {
+	if (!profile) {
 		return <Preloader/>
 	}
 
@@ -27,15 +25,15 @@ export const ProfileInfo = (props) => {
 
 				<div className={style.profile__avatar}>
 					<img
-					src={props.profile.photos.large || userAvatar}
+					src={profile.photos.large || userAvatar}
 					alt='logo' />
 				</div>
 
 				<div className='profile__text-content'>
 					<h2 className='profile__title'>My name</h2>
 					<div className='profile__info'>
-						<p>{props.profile.fullName}</p>
-						<p>{props.profile.aboutMe}</p>
+						<p>{profile.fullName}</p>
+						<p>{profile.aboutMe}</p>
 						<p>about me</p>
 						<p>about me</p>
 					</div>
@@ -44,13 +42,11 @@ export const ProfileInfo = (props) => {
 				<ProfileStatusWithHooks
 				//status = 'hello'
 				//
-				status = {props.status}
-				updateUserStatusTC = {props.updateUserStatusTC}
-				currentUserPofileId = {props.profile.userId}
-				autorizedUserId={props.autorizedUserId}
+				status = {status}
+				updateUserStatusTC = {updateUserStatusTC}
+				currentUserPofileId = {profile.userId}
+				autorizedUserId={autorizedUserId}
 				/>
-
-
 			</div>
 		</div>
 	</>
