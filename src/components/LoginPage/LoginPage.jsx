@@ -4,36 +4,21 @@ import { Navigate } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 import { loginTC, logoutTC } from "../../redax/authReducer";
 import { required } from "../../utils/validators/validators";
-import { Input } from "../common/FormsControls/FormsControls";
+import { createField, Input } from "../common/FormsControls/FormsControls";
 import style from './../common/FormsControls/FormsControls.module.css'
 
-const LoginForm = ({handleSubmit, error}) => {
+const LoginForm = ({ handleSubmit, error }) => {
 
 	return (
 		<form onSubmit={handleSubmit} >
-			<div>
-				<Field component={Input}
-					name={'email'}
-					placeholder='email'
-					validate={[required]}
-					type="text" />
-			</div>
-			<div>
-				<Field component={Input}
-					name={'password'}
-					placeholder='password'
-					validate={[required]}
-					type="password" />
-			</div>
-			<div>
-				<Field component={Input}
-					name={'rememberMe'}
-					type="checkbox" /> remember me
-			</div>
-			{ error &&
-			<div className={style.formSummaryError}>
-				{error}
-			</div>
+			{createField(Input, 'email', 'email', [required], 'text', null)}
+			{createField(Input, 'password', 'password', [required], "password", null)}
+			{createField(Input, 'rememberMe', null, null,  "checkbox", 'remember me')}
+
+			{error &&
+				<div className={style.formSummaryError}>
+					{error}
+				</div>
 			}
 			<div>
 				<button>login</button>
@@ -50,7 +35,7 @@ const LoginPage = (props) => {
 		props.loginTC(formData.email, formData.password, formData.rememberMe);
 	}
 
-	if(props.isAuth) {
+	if (props.isAuth) {
 		return <Navigate to={'/profile'} />
 	}
 
