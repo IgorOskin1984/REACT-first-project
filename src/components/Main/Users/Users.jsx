@@ -2,6 +2,7 @@ import React from "react";
 import style from './Users.module.css'
 import userLogo from '../../../img/user_image_png.png'
 import { NavLink } from "react-router-dom";
+import { Paginator } from "../../common/Paginator/Paginator";
 
 const Users = ({
 	totalUsersCount,
@@ -13,21 +14,22 @@ const Users = ({
 	followThunkCreater,
 	unfollowThunkCreater }) => {
 
-	let pagesCount = Math.ceil(totalUsersCount / pageSize);
-	let pages = [];
-	for (let i = 1; i <= pagesCount; i++) {
-		pages.push(i)
-	}
+
 
 	return <div>
-
-		<div className={style.pageNumbers}>
+		<Paginator
+		totalUsersCount= {totalUsersCount}
+		pageSize={pageSize}
+		currentPage ={currentPage}
+		onPageChanged = {onPageChanged}
+		/>
+		{/*<div className={style.pageNumbers}>
 			{pages.map(p => {
 				return <span className={currentPage === p && style.selectedPage}
 					onClick={(e) => { onPageChanged(p); }}>{p}</span>
 			})
 			}
-		</div>
+		</div>*/}
 
 		{
 			users.map(user => <div key={user.id} className={style.user_conteiner} >
