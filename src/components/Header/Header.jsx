@@ -5,7 +5,7 @@ import style from './Header.module.css'
 const Header = ({isAuth, login, logoutTC }) => {
 	return <>
 		<header className={style.header}>
-			<span>i am header</span>
+			<span><a>i am header</a></span>
 			<div className={style.login_block}>
 				{isAuth
 				? <div>{login} - <button onClick={logoutTC} >Log out</button></div>
