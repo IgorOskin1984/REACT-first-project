@@ -10,15 +10,9 @@ export class ProfileStatus extends React.Component {
 	}
 
 	activateEditMode = () => {
-		authAPI.me()
-			.then(responce => {
-				responce = responce.data.data.id;
-				if (responce === this.props.userPofileId) {
-					this.setState({
-						editMode: true
-					})
-				}
-			})
+		this.setState({
+			editMode: true
+		})
 	}
 	deactivateEditMode = () => {
 		this.setState({
@@ -32,7 +26,7 @@ export class ProfileStatus extends React.Component {
 		})
 	}
 	componentDidUpdate(prevProps, prevState) {
-		if(prevProps.status !== this.props.status ) {
+		if (prevProps.status !== this.props.status) {
 			this.setState({
 				status: this.props.status
 			})
