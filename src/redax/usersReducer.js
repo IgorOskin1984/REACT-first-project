@@ -12,7 +12,7 @@ const TOOGLE_IS_FOLLOWING_PROGRESS = 'TOOGLE_IS_FOLLOWING_PROGRESS';
 
 let initialState = {
 	users: [],
-	pageSize: 50,
+	pageSize: 20,
 	totalUsersCount: 0,
 	currentPage: 1,
 	isFetching: false,
@@ -24,13 +24,13 @@ const usersPageReducer = (state = initialState, action) => {
 		case FOLLOW:
 			return {
 				...state,
-				users: updateObjectInArray(state.users, action.userId, 'id', {followed: true})
+				users: updateObjectInArray(state.users, action.userId, 'id', { followed: true })
 			}
 
 		case UNFOLLOW:
 			return {
 				...state,
-				users: updateObjectInArray(state.users, action.userId, 'id', {followed: false})
+				users: updateObjectInArray(state.users, action.userId, 'id', { followed: false })
 			}
 
 		case SET_USERS:
@@ -97,13 +97,13 @@ export const onPageChangedThunkCreater = (pageNumber, pageSize) => async (dispat
 
 //*код ниже - пример рефакторинга 2 функций с дублируещимся кодом
 
-const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreater ) => {
-	dispatch(toogleFollowingProgress(true, userId));		
-		const data = await apiMethod(userId)
-		if (data.resultCode === 0) {
-			dispatch(actionCreater(userId))
-		}
-		dispatch(toogleFollowingProgress(false, userId));
+const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreater) => {
+	dispatch(toogleFollowingProgress(true, userId));
+	const data = await apiMethod(userId)
+	if (data.resultCode === 0) {
+		dispatch(actionCreater(userId))
+	}
+	dispatch(toogleFollowingProgress(false, userId));
 }
 
 export const unfollowThunkCreater = (userId) => {
