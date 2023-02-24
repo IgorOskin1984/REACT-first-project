@@ -1,15 +1,17 @@
-import React from "react";
+import React, { Suspense } from "react";
 import style from './Main.module.css';
 import Sidebar from "./Sidebar/Sidebar";
-import Profile from "./Profile/Profile";
 import DialogsConteiner from "./Dialogs/DialogsContainer";
 import { Route, Routes } from "react-router-dom";
 import Music from "./Music/Music";
 import News from "./News/News";
 import Settings from "./Settings/Settings";
 import UsersConteiner from "./Users/UsersContainer";
-import ProfileContainer from './Profile/ProfileContainer'
 import LoginPage from "../LoginPage/LoginPage";
+import withSuspense from "../../hoc/withSuspense";
+
+const ProfileContainer = React.lazy(() => import('./Profile/ProfileContainer'));
+//import  from './Profile/ProfileContainer'
 
 const Main = (props) => {
 	//console.log(props);
@@ -21,13 +23,25 @@ const Main = (props) => {
 			<section>
 				<Routes>
 					<Route path="/"
-						element={<ProfileContainer />}/>
+						element={
+							<Suspense fallback={<div>Загрузка...</div>}>
+								<ProfileContainer />
+							</Suspense>
+						} />
 					<Route path="/profile/*"
-						element={<ProfileContainer />}/>
+						element={
+							<Suspense fallback={<div>Загрузка...</div>}>
+								<ProfileContainer />
+							</Suspense>
+						} />
 					<Route path="/profile/:userId"
-						element={<ProfileContainer />}/>
+						element={
+							<Suspense fallback={<div>Загрузка...</div>}>
+								<ProfileContainer />
+							</Suspense>
+						} />
 					<Route path="/dialogs/*"
-						element={<DialogsConteiner />}/>
+						element={<DialogsConteiner />} />
 					<Route path="/news"
 						element={<News />} />
 					<Route path="/music"
