@@ -8,7 +8,7 @@ import { autoficationTC } from './redax/appReducer'
 import { compose } from 'redux';
 import { withRouter } from './components/Main/Profile/ProfileContainer';
 import Preloader from './components/common/Preloader/Preloader';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 import store from './redax/redux-store'
 
 
@@ -48,13 +48,16 @@ const AppContainer = compose(
 
 const MainApp = (props) => {
 	return (
-	//<React.StrictMode>
-	<BrowserRouter>
-		<Provider store={store}>
-			<AppContainer />
-		</Provider>
-	</BrowserRouter>
-	//</React.StrictMode>
+		//<React.StrictMode>
+		//<BrowserRouter basename={process.env.PUBLIC_URL}>
+		//! HashRouter нужен для githum pages
+		<HashRouter>
+			<Provider store={store}>
+				<AppContainer />
+			</Provider>
+		</HashRouter>
+		//</BrowserRouter>
+		//</React.StrictMode>
 	)
 }
 
