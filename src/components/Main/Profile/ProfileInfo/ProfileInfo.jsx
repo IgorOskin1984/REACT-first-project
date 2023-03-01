@@ -6,12 +6,12 @@ import userAvatar from './../../../../img/user_image_png.png'
 import { ProfileStatusWithHooks } from './ProfileStatusWithHooks';
 
 
-export const ProfileInfo = ({profile, status, updateUserStatusTC, autorizedUserId}) => {
+export const ProfileInfo = ({ profile, status, updateUserStatusTC, autorizedUserId }) => {
 
 	//console.log(props);
 
 	if (!profile) {
-		return <Preloader/>
+		return <Preloader />
 	}
 
 	return <>
@@ -25,8 +25,8 @@ export const ProfileInfo = ({profile, status, updateUserStatusTC, autorizedUserI
 
 				<div className={style.profile__avatar}>
 					<img
-					src={profile.photos.large || userAvatar}
-					alt='logo' />
+						src={profile.photos.large || userAvatar}
+						alt='logo' />
 				</div>
 
 				<div className='profile__text-content'>
@@ -40,12 +40,12 @@ export const ProfileInfo = ({profile, status, updateUserStatusTC, autorizedUserI
 				</div>
 
 				<ProfileStatusWithHooks
-				//status = 'hello'
-				//
-				status = {status}
-				updateUserStatusTC = {updateUserStatusTC}
-				currentUserPofileId = {profile.userId}
-				autorizedUserId={autorizedUserId}
+					//status = 'hello'
+					//
+					status={status}
+					updateUserStatusTC={updateUserStatusTC}
+					currentUserPofileId={profile.userId}
+					autorizedUserId={autorizedUserId}
 				/>
 			</div>
 		</div>
