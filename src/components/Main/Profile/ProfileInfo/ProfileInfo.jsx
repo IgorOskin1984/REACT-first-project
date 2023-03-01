@@ -6,9 +6,16 @@ import userAvatar from './../../../../img/user_image_png.png'
 import { ProfileStatusWithHooks } from './ProfileStatusWithHooks';
 
 
-export const ProfileInfo = ({ profile, status, updateUserStatusTC, autorizedUserId }) => {
+export const ProfileInfo = ({ profile, status, updateUserStatusTC, autorizedUserId, isOwner, savePhoto }) => {
 
 	//console.log(props);
+	//debugger
+
+	const onMainPhotosSelected = (event) => {
+		if (event.target.files.length) {
+			savePhoto(event.target.files[0])
+		}
+	}
 
 	if (!profile) {
 		return <Preloader />
@@ -29,6 +36,7 @@ export const ProfileInfo = ({ profile, status, updateUserStatusTC, autorizedUser
 						alt='logo' />
 				</div>
 
+
 				<div className='profile__text-content'>
 					<h2 className='profile__title'>My name</h2>
 					<div className='profile__info'>
@@ -47,6 +55,9 @@ export const ProfileInfo = ({ profile, status, updateUserStatusTC, autorizedUser
 					currentUserPofileId={profile.userId}
 					autorizedUserId={autorizedUserId}
 				/>
+				<div>
+					{isOwner && <input type={'file'} onChange={onMainPhotosSelected} />}
+				</div>
 			</div>
 		</div>
 	</>
