@@ -87,7 +87,6 @@ export const updateUserStatusTC = (status) => async (dispatch) => {
 export const updateUserPhotoTC = (userPhoto) => async (dispatch) => {
 	const responce = await profileAPI.addUserPhotoAPI(userPhoto)
 	if (responce.data.resultCode === 0) {
-		console.log(responce.data.data.photos);
 		dispatch(setUserPhotoAC(responce.data.data.photos))
 	}
 }
@@ -100,7 +99,7 @@ export const updateUserPhotoTC = (userPhoto) => async (dispatch) => {
 }
 //!
 //*код ниже - это принцип работы thunk
-//export const updateUserStatusTC = (status) => {
+//export const updateUserPhotoAPITC = (status) => {
 //	return (dispatch) => {
 //		profileAPI.updateUserStatus(status)
 //			.then(responce => {

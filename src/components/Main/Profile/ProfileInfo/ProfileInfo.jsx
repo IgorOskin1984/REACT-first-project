@@ -55,9 +55,12 @@ export const ProfileInfo = ({ profile, status, autorizedUserId, updateUserStatus
 					autorizedUserId={autorizedUserId}
 				/>
 
-				<div className={style.addPhotoWrapper}>
-					<input type="file" onChange={onGetPotoFile} />
-				</div>
+				{
+					!isOwner &&
+					<div className={style.profileAddPotoInputWrapper}>
+						<input type="file" onChange={onGetPotoFile} />
+					</div>
+				}
 			</div>
 		</div>
 	</>

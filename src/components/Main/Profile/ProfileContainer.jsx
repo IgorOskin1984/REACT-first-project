@@ -41,7 +41,6 @@ class ProfileContainer extends React.Component {
 		//
 	}
 	componentDidMount() {
-		//console.log(this.props);
 		this.refreshProfile()
 	}
 	componentDidUpdate(prevProps, prevState, snapshot) {
@@ -56,6 +55,7 @@ class ProfileContainer extends React.Component {
 				isOwner={!this.props.match.params.userId}
 				profile={this.props.profile}
 				status={this.props.status}
+				isOwner={this.props.match.params.userId}
 				updateUserStatusTC={this.props.updateUserStatusTC}
 				updateUserPhotoTC={this.props.updateUserPhotoTC}
 			//
@@ -67,9 +67,7 @@ class ProfileContainer extends React.Component {
 const mapStateToProps = (state) => {
 	return {
 		profile: state.profilePage.profile,
-		//
 		status: state.profilePage.status,
-		//
 		autorizedUserId: state.auth.userId
 	}
 }
