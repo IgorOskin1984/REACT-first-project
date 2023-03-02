@@ -7,7 +7,7 @@ import PostBodyContainer from "./PostSection/PostBody/PostBodyContainer";
 
 //!наверно надо сделать Navigate
 
-const Profile = ({ profile, status, updateUserStatusTC, autorizedUserId, isOwner, savePhoto }) => {
+const Profile = ({ profile, status, autorizedUserId, updateUserStatusTC, updateUserPhotoTC }) => {
 
 	return (
 		<section className={style.contentBody}>
@@ -15,9 +15,9 @@ const Profile = ({ profile, status, updateUserStatusTC, autorizedUserId, isOwner
 				isOwner={isOwner}
 				profile={profile}
 				status={status}
-				updateUserStatusTC={updateUserStatusTC}
 				autorizedUserId={autorizedUserId}
-				savePhoto={savePhoto}
+				updateUserStatusTC={updateUserStatusTC}
+				updateUserPhotoTC={updateUserPhotoTC}
 			/>
 			<div>
 				<PostInputContainer />

@@ -23,7 +23,7 @@ export const ProfileStatusWithHooks = React.memo((props) => {
 
 
 	return (
-		<div className={style.profileStatus} >
+		<div className={style.profileStatus}>
 			{!editMode &&
 				<div>
 					<span

@@ -3,7 +3,7 @@ import { profileAPI, usersAPI } from "../api/api";
 const ADD_POST = 'exclusive-name/profile-ruducer/ADD-POST';
 const SET_USER_PROFILE = 'exclusive-name/profile-ruducer/SET_USER_PROFILE';
 const SET_USER_STATUS = 'exclusive-name/profile-ruducer/SET_USER_STATUS';
-const SAVE_PHOTO_SUCCESS = 'exclusive-name/profile-ruducer/SAVE_PHOTO_SUCCESS';
+const SET_USER_PHOTO_SUCCESS = 'exclusive-name/profile-ruducer/SET_USER_PHOTO_SUCCESS';
 
 let initialState = {
 	postBodyData: [
@@ -43,12 +43,12 @@ const profilePageReducer = (state = initialState, action) => {
 				...state,
 				status: action.status
 			}
-		case SAVE_PHOTO_SUCCESS:
+		case SET_USER_PHOTO_SUCCESS:
 			return {
 				...state,
 				profile: {
 					...state.profile,
-					photos: action.photos
+					photos: action.userPhoto
 				}
 			}
 		default:
@@ -65,7 +65,7 @@ export const addNewPostActionCreator = (text) => {
 }
 export const setUserProfile = (profile, userId) => ({ type: SET_USER_PROFILE, profile, userId })
 export const setUserStatusAC = (status) => ({ type: SET_USER_STATUS, status })
-export const savePhotoSuccessAC = (photos) => ({ type: SAVE_PHOTO_SUCCESS, photos })
+export const setUserPhotoAC = (userPhoto) => ({ type: SET_USER_PHOTO_SUCCESS, userPhoto })
 
 //thunk creaters------------------------------------------
 export const getUserProfileThunkCreator = (userId) => async (dispatch) => {
@@ -84,10 +84,11 @@ export const updateUserStatusTC = (status) => async (dispatch) => {
 		dispatch(setUserStatusAC(status))
 	}
 }
-export const savePhotoTC = (file) => async (dispatch) => {
-	const responce = await profileAPI.savePhotoAPI(file)
+export const updateUserPhotoTC = (userPhoto) => async (dispatch) => {
+	const responce = await profileAPI.addUserPhotoAPI(userPhoto)
 	if (responce.data.resultCode === 0) {
-		dispatch(savePhotoSuccessAC(responce.data.data.photos))
+		console.log(responce.data.data.photos);
+		dispatch(setUserPhotoAC(responce.data.data.photos))
 	}
 }
 //!

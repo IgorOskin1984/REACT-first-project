@@ -6,14 +6,13 @@ import userAvatar from './../../../../img/user_image_png.png'
 import { ProfileStatusWithHooks } from './ProfileStatusWithHooks';
 
 
-export const ProfileInfo = ({ profile, status, updateUserStatusTC, autorizedUserId, isOwner, savePhoto }) => {
+export const ProfileInfo = ({ profile, status, autorizedUserId, updateUserStatusTC, updateUserPhotoTC }) => {
 
 	//console.log(props);
-	//debugger
 
-	const onMainPhotosSelected = (event) => {
-		if (event.target.files.length) {
-			savePhoto(event.target.files[0])
+	const onGetPotoFile = (e) => {
+		if (e.target.files.length) {
+			updateUserPhotoTC(e.target.files[0])
 		}
 	}
 
@@ -55,8 +54,9 @@ export const ProfileInfo = ({ profile, status, updateUserStatusTC, autorizedUser
 					currentUserPofileId={profile.userId}
 					autorizedUserId={autorizedUserId}
 				/>
-				<div>
-					{isOwner && <input type={'file'} onChange={onMainPhotosSelected} />}
+
+				<div className={style.addPhotoWrapper}>
+					<input type="file" onChange={onGetPotoFile} />
 				</div>
 			</div>
 		</div>
