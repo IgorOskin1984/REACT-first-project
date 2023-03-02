@@ -44,6 +44,17 @@ export const profileAPI = {
 	updateUserStatus(newStatus) {
 		return axiosInctance.put(`profile/status`,
 			{ status: newStatus });
+	},
+	addUserPhotoAPI(photoFile) {
+		const formData = new FormData;
+		formData.append('image', photoFile)
+		return axiosInctance.put(`/profile/photo`, formData,
+			{
+				headers: {
+					'Content-Type': 'multipart/form-data'
+				}
+			}
+		)
 	}
 }
 
@@ -55,7 +66,7 @@ export const authAPI = {
 		return axiosInctance.get(`profile/${responceUserId}`)
 	},
 	login(email, password, rememberMe = false) {
-		return axiosInctance.post(`auth/login`, {email, password, rememberMe})
+		return axiosInctance.post(`auth/login`, { email, password, rememberMe })
 	},
 	logout() {
 		return axiosInctance.delete(`auth/login`);

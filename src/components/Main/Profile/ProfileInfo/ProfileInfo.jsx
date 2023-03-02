@@ -6,9 +6,15 @@ import userAvatar from './../../../../img/user_image_png.png'
 import { ProfileStatusWithHooks } from './ProfileStatusWithHooks';
 
 
-export const ProfileInfo = ({ profile, status, updateUserStatusTC, autorizedUserId }) => {
+export const ProfileInfo = ({ profile, status, autorizedUserId, updateUserStatusTC, updateUserPhotoTC }) => {
 
 	//console.log(props);
+
+	const onGetPotoFile = (e) => {
+		if (e.target.files.length) {
+			updateUserPhotoTC(e.target.files[0])
+		}
+	}
 
 	if (!profile) {
 		return <Preloader />
@@ -47,6 +53,10 @@ export const ProfileInfo = ({ profile, status, updateUserStatusTC, autorizedUser
 					currentUserPofileId={profile.userId}
 					autorizedUserId={autorizedUserId}
 				/>
+
+				<div className={style.addPhotoWrapper}>
+					<input type="file" onChange={onGetPotoFile} />
+				</div>
 			</div>
 		</div>
 	</>
