@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './ProfileInfo.module.css';
 import wallpapers from './../../../../img/01.jpg';
 import Preloader from '../../../common/Preloader/Preloader';
 import userAvatar from './../../../../img/user_image_png.png'
 import { ProfileStatusWithHooks } from './ProfileStatusWithHooks';
 
-
-export const ProfileInfo = ({ profile, status, autorizedUserId, isOwner, updateUserStatusTC, updateUserPhotoTC }) => {
+const ProfileInfo = ({ profile, status, autorizedUserId, isOwner, updateUserStatusTC, updateUserPhotoTC }) => {
 
 	//console.log(props);
+
+	const [editMode, setEditMode] = useState(false)
 
 	const onGetPotoFile = (e) => {
 		if (e.target.files.length) {
@@ -37,26 +38,28 @@ export const ProfileInfo = ({ profile, status, autorizedUserId, isOwner, updateU
 
 
 				<div className='profile__text-content'>
-					<h2 className='profile__title'>My name</h2>
+					<h2 className='profile__title'>My profile</h2>
 					<div className='profile__info'>
-						<p>{profile.fullName}</p>
-						<p>{profile.aboutMe}</p>
-						<p>about me</p>
-						<p>about me</p>
+
+						{editMode
+							? <ProfileDataForm profile={profile} />
+							: <ProfileData profile={profile} isOwner={isOwner} chengeEditMode={() => { setEditMode(true) }} />}
+
+
+
+						<ProfileStatusWithHooks
+							//status = 'hello'
+							//
+							status={status}
+							updateUserStatusTC={updateUserStatusTC}
+							currentUserPofileId={profile.userId}
+							autorizedUserId={autorizedUserId}
+						/>
 					</div>
 				</div>
 
-				<ProfileStatusWithHooks
-					//status = 'hello'
-					//
-					status={status}
-					updateUserStatusTC={updateUserStatusTC}
-					currentUserPofileId={profile.userId}
-					autorizedUserId={autorizedUserId}
-				/>
-
 				{
-					!isOwner &&
+					isOwner &&
 					<div className={style.profileAddPotoInputWrapper}>
 						<input type="file" onChange={onGetPotoFile} />
 					</div>
@@ -65,4 +68,64 @@ export const ProfileInfo = ({ profile, status, autorizedUserId, isOwner, updateU
 		</div>
 	</>
 }
+
+const ProfileData = ({ profile, isOwner, chengeEditMode }) => {
+	console.log(isOwner);
+	return (
+		<div>
+			{isOwner &&
+				<div>
+					<button onClick={chengeEditMode}>Edit button</button>
+				</div>
+			}
+			<div>
+				<p>
+					<span className={style.boldSpan}>My name</span>: {profile.fullName}
+				</p>
+			</div>
+			<div>
+				<p>
+					<span className={style.boldSpan}>Looking for a job</span>: {profile.lookingForAJob ? 'yes' : 'no'}
+				</p>
+			</div>
+			{profile.lookingForAJob &&
+				<div>
+					<p>
+						<span className={style.boldSpan}>My profetional skills</span>: {profile.lookingForAJobDescription}
+					</p>
+				</div>
+			}
+			<div>
+				<p>
+					<span className={style.boldSpan}>About me</span>: {profile.aboutMe}
+				</p>
+			</div>
+			<div>
+				<span className={style.boldSpan}>Contacts</span>: {Object.keys(profile.contacts).map(key => {
+
+					return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />
+
+
+				})}
+			</div>
+		</div>
+	)
+}
+const ProfileDataForm = ({ profile }) => {
+	return (
+		<div>
+			form
+		</div>
+	)
+}
+
+const Contact = ({ contactTitle, contactValue }) => {
+	return (
+		<li>
+			<span className={style.boldSpan}>{contactTitle}</span>: {contactValue}
+		</li>
+	)
+}
+
+export default ProfileInfo;
 

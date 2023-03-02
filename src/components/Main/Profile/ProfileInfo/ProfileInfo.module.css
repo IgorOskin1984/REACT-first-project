@@ -46,3 +46,7 @@
 .profileAddPotoInputWrapper {
 	grid-area: 2/1/2/1;
 }
+
+.boldSpan {
+	font-weight: 700;
+}
