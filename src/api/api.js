@@ -45,15 +45,16 @@ export const profileAPI = {
 		return axiosInctance.put(`profile/status`,
 			{ status: newStatus });
 	},
-	updateUserPhotoAPI(userPhoto) {
+	addUserPhotoAPI(photoFile) {
 		const formData = new FormData;
-		formData.append('image', userPhoto)
+		formData.append('image', photoFile)
 		return axiosInctance.put(`/profile/photo`, formData,
 			{
 				headers: {
 					'Content-Type': 'multipart/form-data'
 				}
-			});
+			}
+		)
 	}
 }
 
