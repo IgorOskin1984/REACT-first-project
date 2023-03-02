@@ -6,7 +6,7 @@ import userAvatar from './../../../../img/user_image_png.png'
 import { ProfileStatusWithHooks } from './ProfileStatusWithHooks';
 
 
-export const ProfileInfo = ({ profile, status, autorizedUserId, updateUserStatusTC, updateUserPhotoTC }) => {
+export const ProfileInfo = ({ profile, status, autorizedUserId, isOwner, updateUserStatusTC, updateUserPhotoTC }) => {
 
 	//console.log(props);
 

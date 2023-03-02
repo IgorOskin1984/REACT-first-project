@@ -7,7 +7,7 @@ import PostBodyContainer from "./PostSection/PostBody/PostBodyContainer";
 
 //!наверно надо сделать Navigate
 
-const Profile = ({ profile, status, autorizedUserId, updateUserStatusTC, updateUserPhotoTC }) => {
+const Profile = ({ profile, status, autorizedUserId, isOwner, updateUserStatusTC, updateUserPhotoTC }) => {
 
 	return (
 		<section className={style.contentBody}>
