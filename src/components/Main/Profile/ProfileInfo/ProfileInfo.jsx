@@ -21,68 +21,57 @@ const ProfileInfo = ({ profile, status, autorizedUserId, isOwner, updateUserStat
 		return <Preloader />
 	}
 
-	return <>
-		<div className={style.wallpapers}>
-			<img className='profile__img-img' src={wallpapers}></img>
+	return (
+		<div>
+
+
+			{/*<section className={style.content} >*/}
+			<div className={style.content__profile}>
+				<div className={style.profile__discription}>
+
+					{
+						isOwner &&
+						<div className={style.profileAddPotoInputWrapper}>
+							<input type="file" onChange={onGetPotoFile} />
+						</div>
+					}
+
+					<div className={style.profile__avatar}>
+						<img
+							src={profile.photos.large || userAvatar}
+							alt='logo' />
+					</div>
+
+
+					<div className={style.profile__textContent}>
+						<h2 className={style.title}>My profile</h2>
+						<div className='profile__info'>
+
+							{editMode
+								? <ProfileDataForm profile={profile} />
+								: <ProfileData profile={profile} isOwner={isOwner} chengeEditMode={() => { setEditMode(true) }} />
+							}
+
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-
-		{/*<section className={style.content} >*/}
-		<div className={style.content__profile}>
-			<div className={style.profile__discription}>
-
-				{
-					isOwner &&
-					<div className={style.profileAddPotoInputWrapper}>
-						<input type="file" onChange={onGetPotoFile} />
-					</div>
-				}
-
-				<div className={style.profile__avatar}>
-					<img
-						src={profile.photos.large || userAvatar}
-						alt='logo' />
-				</div>
-
-
-				<div className='profile__text-content'>
-					<h2 className='profile__title'>My profile</h2>
-					<div className='profile__info'>
-
-						{editMode
-							? <ProfileDataForm profile={profile} />
-							: <ProfileData profile={profile} isOwner={isOwner} chengeEditMode={() => { setEditMode(true) }} />}
-
-
-
-						<ProfileStatusWithHooks
-							//status = 'hello'
-							//
-							status={status}
-							updateUserStatusTC={updateUserStatusTC}
-							currentUserPofileId={profile.userId}
-							autorizedUserId={autorizedUserId}
-						/>
-					</div>
-				</div>
-
-				{
-					isOwner &&
-					<div className={style.profileAddPotoInputWrapper}>
-						<input type="file" onChange={onGetPotoFile} />
-					</div>
-				</div>
-		</div>
-	</div>
-	</>
+	)
 }
 
-const ProfileData = ({ profile, isOwner, chengeEditMode }) => {
+const ProfileData = ({ profile, status, autorizedUserId, isOwner, updateUserStatusTC, chengeEditMode }) => {
 	console.log(isOwner);
 	return (
 		<div>
 			{isOwner &&
 				<div>
-					<button onClick={chengeEditMode}>Edit button</button>
+					<p>
+						<button onClick={chengeEditMode}>Edit profile</button>
+					</p>
 				</div>
 			}
 			<div>
@@ -109,12 +98,17 @@ const ProfileData = ({ profile, isOwner, chengeEditMode }) => {
 			</div>
 			<div>
 				<span className={style.boldSpan}>Contacts</span>: {Object.keys(profile.contacts).map(key => {
-
 					return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />
-
-
 				})}
 			</div>
+			<ProfileStatusWithHooks
+				//status = 'hello'
+				//
+				status={status}
+				updateUserStatusTC={updateUserStatusTC}
+				currentUserPofileId={profile.userId}
+				autorizedUserId={autorizedUserId}
+			/>
 		</div>
 	)
 }
