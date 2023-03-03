@@ -30,6 +30,13 @@ const ProfileInfo = ({ profile, status, autorizedUserId, isOwner, updateUserStat
 		<div className={style.content__profile}>
 			<div className={style.profile__discription}>
 
+				{
+					isOwner &&
+					<div className={style.profileAddPotoInputWrapper}>
+						<input type="file" onChange={onGetPotoFile} />
+					</div>
+				}
+
 				<div className={style.profile__avatar}>
 					<img
 						src={profile.photos.large || userAvatar}
@@ -63,9 +70,9 @@ const ProfileInfo = ({ profile, status, autorizedUserId, isOwner, updateUserStat
 					<div className={style.profileAddPotoInputWrapper}>
 						<input type="file" onChange={onGetPotoFile} />
 					</div>
-				}
-			</div>
+				</div>
 		</div>
+	</div>
 	</>
 }
 
