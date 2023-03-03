@@ -1,7 +1,6 @@
 import React from "react";
 import style from './Profile.module.css';
-import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
-import { Navigate } from "react-router-dom";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import PostInputContainer from "./PostSection/PostInput/PostInputContainer";
 import PostBodyContainer from "./PostSection/PostBody/PostBodyContainer";
 

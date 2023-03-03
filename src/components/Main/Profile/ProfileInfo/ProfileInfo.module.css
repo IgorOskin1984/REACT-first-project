@@ -19,15 +19,15 @@
 .profile__discription {
 	display: grid;
 	grid-template-columns: minmax(auto, 200px) 1fr;
-	grid-template-rows: 1fr 50px 50px;
-	column-gap: 2rem;
+	grid-template-rows: 50px 1fr;
+	column-gap: 5rem;
+	padding: 2rem 0 0 2rem;
 }
 
 .profile__avatar {
 	position: relative;
-	border-radius: 50%;
 	overflow: hidden;
-
+	grid-area: 2/1/2/1;
 }
 
 .profile__avatar img {
@@ -39,10 +39,18 @@
 	object-fit: contain;
 }
 
-.profileStatus {
+/*.profileStatus {
 	grid-area: 3/1/3/1;
-}
+}*/
 
 .profileAddPotoInputWrapper {
-	grid-area: 2/1/2/1;
+	grid-area: 1/1/1/1;
+}
+
+.boldSpan {
+	font-weight: 700;
+}
+
+.profile__textContent {
+	grid-area: 2/2/2/2;
 }
