@@ -53,6 +53,10 @@ const ProfileInfo = ({ profile, isOwner, autorizedUserId, updateUserPhotoTC, set
 									isOwner={isOwner} onSubmit={onSubmit} />
 								: <ProfileData profile={profile} isOwner={isOwner} chengeEditMode={() => { setEditMode(true) }} />
 							}
+
+
+
+
 						</div>
 					</div>
 

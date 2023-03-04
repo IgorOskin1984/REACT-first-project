@@ -38,13 +38,11 @@ export const createField = (
 	return (
 		<div>
 			<Field
-				// *component это созданные нами Input Textarea
-				component={componentValue}
-				name={nameValue}//*название ключа согласно API
+				component={componentValue} //*название компоненты Input или Textarea
+				name={nameValue} //* имя поля согласно API документации
 				placeholder={placeholderValue}
 				validate={validateValue}
 				type={typeValue}
-				{...props}
 			/> {text}
 		</div>
 	)

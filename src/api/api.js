@@ -54,23 +54,22 @@ export const profileAPI = {
 					'Content-Type': 'multipart/form-data'
 				}
 			});
-	},
-	putUserProfileAPI(profile) {
-		return axiosInctance.put(`profile`, profile);
-	},
-}
+		putUserProfileAPI(profile) {
+			return axiosInctance.put(`profile`, profile);
+		},
+	}
 
 export const authAPI = {
-	me() {
-		return axiosInctance.get(`auth/me`)
-	},
-	responceUserId(responceUserId) {
-		return axiosInctance.get(`profile/${responceUserId}`)
-	},
-	login(email, password, rememberMe = false) {
-		return axiosInctance.post(`auth/login`, { email, password, rememberMe })
-	},
-	logout() {
-		return axiosInctance.delete(`auth/login`);
+		me() {
+			return axiosInctance.get(`auth/me`)
+		},
+		responceUserId(responceUserId) {
+			return axiosInctance.get(`profile/${responceUserId}`)
+		},
+		login(email, password, rememberMe = false) {
+			return axiosInctance.post(`auth/login`, { email, password, rememberMe })
+		},
+		logout() {
+			return axiosInctance.delete(`auth/login`);
+		}
 	}
-}

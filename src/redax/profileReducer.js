@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useStore } from "react-redux";
 import { profileAPI, usersAPI } from "../api/api";
 
 const ADD_POST = 'exclusive-name/profile-ruducer/ADD-POST';
