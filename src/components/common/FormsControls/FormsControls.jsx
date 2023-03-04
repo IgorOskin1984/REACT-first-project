@@ -2,7 +2,7 @@ import React from "react";
 import { Field } from "redux-form";
 import style from './FormsControls.module.css'
 
-const FormsControl = ({ input, meta: {touched, error}, children}) => {
+const FormsControl = ({ input, meta: { touched, error }, children }) => {
 	const hasError = touched && error;
 	return (
 		<div className={style.formsControls + ' ' + (hasError ? style.error : '')}>
@@ -36,12 +36,13 @@ export const createField = (
 	text = '') => {
 	return (
 		<div>
-			<Field component={componentValue}
-				name={nameValue}
+			<Field
+				component={componentValue} //*название компоненты Input или Textarea
+				name={nameValue} //* имя поля согласно API документации
 				placeholder={placeholderValue}
 				validate={validateValue}
 				type={typeValue}
-				/> {text}
+			/> {text}
 		</div>
 	)
 }

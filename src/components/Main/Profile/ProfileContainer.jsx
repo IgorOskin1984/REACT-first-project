@@ -5,7 +5,8 @@ import {
 	updateUserStatusTC,
 	getUserStatusTC,
 	getUserProfileThunkCreator,
-	updateUserPhotoTC
+	updateUserPhotoTC,
+	setUserProfileTC
 } from './../../../redax/profileReducer'
 import { useParams } from "react-router-dom";
 import { withAuthRedirect } from "../../../hoc/withAuthRedirectNavigate";
@@ -56,6 +57,7 @@ class ProfileContainer extends React.Component {
 				isOwner={!this.props.match.params.userId}
 				updateUserStatusTC={this.props.updateUserStatusTC}
 				updateUserPhotoTC={this.props.updateUserPhotoTC}
+				setUserProfileTC={this.props.setUserProfileTC}
 			//
 			/>
 		</>
@@ -76,7 +78,8 @@ export default compose(
 			getUserProfileThunkCreator,
 			getUserStatusTC,
 			updateUserStatusTC,
-			updateUserPhotoTC
+			updateUserPhotoTC,
+			setUserProfileTC
 		}),
 	withRouter,
 	withAuthRedirect

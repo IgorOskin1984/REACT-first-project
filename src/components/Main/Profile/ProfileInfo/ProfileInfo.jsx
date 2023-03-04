@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import style from './ProfileInfo.module.css';
-import wallpapers from './../../../../img/01.jpg';
 import Preloader from '../../../common/Preloader/Preloader';
 import userAvatar from './../../../../img/user_image_png.png'
 import { ProfileStatusWithHooks } from './ProfileStatusWithHooks';
+import ProfileDataReduxForm from './ProfileDataForm';
 
-const ProfileInfo = ({ profile, status, autorizedUserId, isOwner, updateUserStatusTC, updateUserPhotoTC }) => {
+const ProfileInfo = ({ profile, status, autorizedUserId, isOwner, updateUserStatusTC, updateUserPhotoTC, setUserProfileTC }) => {
 
 	//console.log(props);
 
@@ -15,6 +15,11 @@ const ProfileInfo = ({ profile, status, autorizedUserId, isOwner, updateUserStat
 		if (e.target.files.length) {
 			updateUserPhotoTC(e.target.files[0])
 		}
+	}
+
+	const onSubmit = (formData) => {
+		setUserProfileTC(formData)
+		setEditMode(false)
 	}
 
 	if (!profile) {
@@ -42,18 +47,16 @@ const ProfileInfo = ({ profile, status, autorizedUserId, isOwner, updateUserStat
 							alt='logo' />
 					</div>
 
-
 					<div className={style.profile__textContent}>
 						<h2 className={style.title}>My profile</h2>
 						<div className='profile__info'>
 
 							{editMode
-								? <ProfileDataForm profile={profile} />
+								? <ProfileDataReduxForm
+									initialValues={profile}
+									onSubmit={onSubmit} profile={profile} />
 								: <ProfileData profile={profile} isOwner={isOwner} chengeEditMode={() => { setEditMode(true) }} />
 							}
-
-
-
 
 						</div>
 					</div>
@@ -64,7 +67,6 @@ const ProfileInfo = ({ profile, status, autorizedUserId, isOwner, updateUserStat
 }
 
 const ProfileData = ({ profile, status, autorizedUserId, isOwner, updateUserStatusTC, chengeEditMode }) => {
-	console.log(isOwner);
 	return (
 		<div>
 			{isOwner &&
@@ -109,13 +111,6 @@ const ProfileData = ({ profile, status, autorizedUserId, isOwner, updateUserStat
 				currentUserPofileId={profile.userId}
 				autorizedUserId={autorizedUserId}
 			/>
-		</div>
-	)
-}
-const ProfileDataForm = ({ profile }) => {
-	return (
-		<div>
-			form
 		</div>
 	)
 }

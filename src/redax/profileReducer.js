@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useStore } from "react-redux";
 import { profileAPI, usersAPI } from "../api/api";
 
 const ADD_POST = 'exclusive-name/profile-ruducer/ADD-POST';
@@ -88,6 +90,14 @@ export const updateUserPhotoTC = (userPhoto) => async (dispatch) => {
 	const responce = await profileAPI.addUserPhotoAPI(userPhoto)
 	if (responce.data.resultCode === 0) {
 		dispatch(setUserPhotoAC(responce.data.data.photos))
+	}
+}
+export const setUserProfileTC = (userProfile) => async (dispatch, getState) => {
+	//debugger
+	const userId = getState().auth.userId;
+	const responce = await profileAPI.putUserProfileAPI(userProfile)
+	if (responce.data.resultCode === 0) {
+		dispatch(getUserProfileThunkCreator(userId))
 	}
 }
 //!
