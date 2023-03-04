@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import style from './ProfileInfo.module.css';
-import wallpapers from './../../../../img/01.jpg';
 import Preloader from '../../../common/Preloader/Preloader';
 import userAvatar from './../../../../img/user_image_png.png'
 import { ProfileStatusWithHooks } from './ProfileStatusWithHooks';
+import ProfileDataFormReduxForm from './ProfileDataForm';
 
-const ProfileInfo = ({ profile, status, autorizedUserId, isOwner, updateUserStatusTC, updateUserPhotoTC }) => {
+const ProfileInfo = ({ profile, isOwner, autorizedUserId, updateUserPhotoTC, setUserProfileTC }) => {
 
 	//console.log(props);
 
@@ -17,15 +17,17 @@ const ProfileInfo = ({ profile, status, autorizedUserId, isOwner, updateUserStat
 		}
 	}
 
+	let onSubmit = (formData) => {
+		setEditMode(false);
+		setUserProfileTC(formData, autorizedUserId)
+	}
+
 	if (!profile) {
 		return <Preloader />
 	}
 
 	return (
 		<div>
-
-
-			{/*<section className={style.content} >*/}
 			<div className={style.content__profile}>
 				<div className={style.profile__discription}>
 
@@ -42,21 +44,18 @@ const ProfileInfo = ({ profile, status, autorizedUserId, isOwner, updateUserStat
 							alt='logo' />
 					</div>
 
-
 					<div className={style.profile__textContent}>
 						<h2 className={style.title}>My profile</h2>
 						<div className='profile__info'>
-
 							{editMode
-								? <ProfileDataForm profile={profile} />
+								? <ProfileDataFormReduxForm
+									initialValues={profile} //!начальные значения
+									isOwner={isOwner} onSubmit={onSubmit} />
 								: <ProfileData profile={profile} isOwner={isOwner} chengeEditMode={() => { setEditMode(true) }} />
 							}
-
-
-
-
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
@@ -64,7 +63,6 @@ const ProfileInfo = ({ profile, status, autorizedUserId, isOwner, updateUserStat
 }
 
 const ProfileData = ({ profile, status, autorizedUserId, isOwner, updateUserStatusTC, chengeEditMode }) => {
-	console.log(isOwner);
 	return (
 		<div>
 			{isOwner &&
@@ -112,14 +110,6 @@ const ProfileData = ({ profile, status, autorizedUserId, isOwner, updateUserStat
 		</div>
 	)
 }
-const ProfileDataForm = ({ profile }) => {
-	return (
-		<div>
-			form
-		</div>
-	)
-}
-
 const Contact = ({ contactTitle, contactValue }) => {
 	return (
 		<li>

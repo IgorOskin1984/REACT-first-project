@@ -67,6 +67,7 @@ export const setUserProfile = (profile, userId) => ({ type: SET_USER_PROFILE, pr
 export const setUserStatusAC = (status) => ({ type: SET_USER_STATUS, status })
 export const setUserPhotoAC = (userPhoto) => ({ type: SET_USER_PHOTO_SUCCESS, userPhoto })
 
+
 //thunk creaters------------------------------------------
 export const getUserProfileThunkCreator = (userId) => async (dispatch) => {
 	const responce = await usersAPI.getProfile(userId);
@@ -88,6 +89,13 @@ export const updateUserPhotoTC = (userPhoto) => async (dispatch) => {
 	const responce = await profileAPI.addUserPhotoAPI(userPhoto)
 	if (responce.data.resultCode === 0) {
 		dispatch(setUserPhotoAC(responce.data.data.photos))
+	}
+}
+export const setUserProfileTC = (profile) => async (dispatch, getState) => {
+	const userId = getState().auth.userId;
+	const responce = await profileAPI.putUserProfileAPI(profile)
+	if (responce.data.resultCode === 0) {
+		dispatch(getUserProfileThunkCreator(userId))
 	}
 }
 //!

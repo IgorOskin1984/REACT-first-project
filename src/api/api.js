@@ -54,7 +54,10 @@ export const profileAPI = {
 					'Content-Type': 'multipart/form-data'
 				}
 			});
-	}
+	},
+	putUserProfileAPI(profile) {
+		return axiosInctance.put(`profile`, profile);
+	},
 }
 
 export const authAPI = {
