@@ -67,10 +67,15 @@ export const authAPI = {
 	responceUserId(responceUserId) {
 		return axiosInctance.get(`profile/${responceUserId}`)
 	},
-	login(email, password, rememberMe = false) {
-		return axiosInctance.post(`auth/login`, { email, password, rememberMe })
+	login(email, password, rememberMe = false, captcha = null) {
+		return axiosInctance.post(`auth/login`, { email, password, rememberMe, captcha })
 	},
 	logout() {
 		return axiosInctance.delete(`auth/login`);
+	}
+}
+export const securityAPI = {
+	getCaptchaUrlAPI() {
+		return axiosInctance.get(`security/get-captcha-url`)
 	}
 }

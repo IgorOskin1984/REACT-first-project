@@ -7,7 +7,7 @@ import { required } from "../../utils/validators/validators";
 import { createField, Input } from "../common/FormsControls/FormsControls";
 import style from './../common/FormsControls/FormsControls.module.css'
 
-const LoginForm = ({ handleSubmit, error }) => {
+const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
 
 	return (
 		<form onSubmit={handleSubmit} >
@@ -20,6 +20,23 @@ const LoginForm = ({ handleSubmit, error }) => {
 					{error}
 				</div>
 			}
+			{
+				captchaUrl &&
+				<div>
+					<img src={captchaUrl} alt="captchaUrl" />
+				</div>
+			}
+
+			{captchaUrl &&
+				createField(
+					Input,
+					'captchaServerName',
+					'Enter the symbols from image',
+					[required],
+					'text',
+					null
+				)
+			}
 			<div>
 				<button>login</button>
 			</div>
@@ -31,8 +48,9 @@ const LoginReduxForm = reduxForm({ form: 'loginForma' })(LoginForm)
 
 const LoginPage = (props) => {
 
+
 	let onSubmit = (formData) => {
-		props.loginTC(formData.email, formData.password, formData.rememberMe);
+		props.loginTC(formData.email, formData.password, formData.rememberMe, formData.captchaServerName);
 	}
 
 	if (props.isAuth) {
@@ -41,12 +59,15 @@ const LoginPage = (props) => {
 
 	return <div>
 		<h1>This is login page</h1>
-		<LoginReduxForm onSubmit={onSubmit} />
+		<LoginReduxForm onSubmit={onSubmit}
+			captchaUrl={props.captchaUrl}
+		/>
 	</div>
 }
 const mapStateToProps = (state) => {
 	return {
-		isAuth: state.auth.isAuth
+		isAuth: state.auth.isAuth,
+		captchaUrl: state.auth.captchaUrl
 	}
 }
 
