@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useStore } from "react-redux";
+import { stopSubmit } from "redux-form";
 import { profileAPI, usersAPI } from "../api/api";
 
 const ADD_POST = 'exclusive-name/profile-ruducer/ADD-POST';
@@ -101,7 +102,10 @@ export const setUserProfileTC = (profile) => async (dispatch, getState) => {
 	}
 	else {
 		const message = responce.data.messages.length > 0 ? responce.data.messages : 'some error'
-		dispatch(stopSubmit('edit_Profile', { _error: message }))
+		dispatch(stopSubmit('edit_Profile', { _error: message[0] }))
+		//*вывод ошибки под поле facebook
+		//dispatch(stopSubmit('edit_Profile', { 'contacts': { 'facebook': message } }))
+		return Promise.reject(message[0])
 	}
 }
 //!

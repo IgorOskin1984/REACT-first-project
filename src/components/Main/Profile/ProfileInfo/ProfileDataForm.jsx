@@ -7,6 +7,11 @@ import style2 from './../../../common/FormsControls/FormsControls.module.css'
 const ProfileDataForm = ({ handleSubmit, error, profile }) => {
 	return (
 		<form onSubmit={handleSubmit}>
+			{error &&
+				<div className={style2.formSummaryError}>
+					{error}
+				</div>
+			}
 
 			<div>
 				<p>
@@ -90,12 +95,6 @@ const ProfileDataForm = ({ handleSubmit, error, profile }) => {
 					)
 				})}
 			</div>
-
-			{error &&
-				<div className={style2.formSummaryError}>
-					{error}
-				</div>
-			}
 		</form>
 	)
 }

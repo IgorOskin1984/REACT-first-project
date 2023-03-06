@@ -18,8 +18,11 @@ const ProfileInfo = ({ profile, isOwner, autorizedUserId, updateUserPhotoTC, set
 	}
 
 	let onSubmit = (formData) => {
-		setUserProfileTC(formData, autorizedUserId)
-		//setEditMode(false);
+		setUserProfileTC(formData).then(
+			() => {
+				setEditMode(false);
+			}
+		)
 	}
 
 	if (!profile) {

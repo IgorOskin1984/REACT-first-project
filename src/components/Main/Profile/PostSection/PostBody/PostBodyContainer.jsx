@@ -12,6 +12,7 @@ class PostBodyContainer extends Component {
 	render() {
 		let postElementsCreater = this.props.postBodyData.map(data => {
 			return <Post_item
+				key={data.id}
 				postText={data.text}
 				postLike={data.postLikeCounter}
 				footerText={'it is posts footer'} />;
