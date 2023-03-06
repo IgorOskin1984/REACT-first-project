@@ -75,7 +75,7 @@ export const authAPI = {
 	}
 }
 export const securityAPI = {
-	getСaptchaUrl() {
+	getCaptchaUrlAPI() {
 		return axiosInctance.get(`security/get-captcha-url`)
 	}
 }

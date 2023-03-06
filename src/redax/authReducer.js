@@ -4,7 +4,7 @@ import { authAPI, securityAPI } from "../api/api";
 const SET_USER_DATA = 'React-Course-network/auth/SET_USER_DATA';
 const SET_LOGIN_IN_USER_PROFILE_DATA = 'React-Course-network/auth/SET_LOGIN_IN_USER_PROFILE_DATA';
 const SET_LOGIN_IN_USER_CONTACTS = 'React-Course-network/auth/SET_LOGIN_IN_USER_CONTACTS';
-const SET_CAPTCHA_URL = 'React-Course-network/auth/SET_CAPTCHA_URL';
+const SET_CAPCHA_SUCCESS = 'React-Course-network/auth/SET_CAPCHA_SUCCESS';
 
 
 let initialState = {
@@ -20,7 +20,7 @@ let initialState = {
 const authReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case SET_USER_DATA:
-		case SET_CAPTCHA_URL: {
+		case SET_CAPCHA_SUCCESS: {
 			return {
 				...state,
 				...action.payload
@@ -45,7 +45,10 @@ const authReducer = (state = initialState, action) => {
 	}
 }
 
-export const setAuthUserDataAC = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, payload: { userId, email, login, isAuth } })
+export const setAuthUserDataAC = (userId, email, login, isAuth) => ({
+	type: SET_USER_DATA,
+	payload: { userId, email, login, isAuth, captchaUrl: null }
+})
 export const setLoginInUserProfileDataAC = (profileData) => {
 	return {
 		type: SET_LOGIN_IN_USER_PROFILE_DATA,
@@ -53,7 +56,7 @@ export const setLoginInUserProfileDataAC = (profileData) => {
 	}
 }
 export const setLoginInUserContactsAC = (loginInUserContacts) => ({ type: SET_LOGIN_IN_USER_CONTACTS, loginInUserContacts })
-export const getСaptchaUrlAC = (captchaUrl) => ({ type: SET_CAPTCHA_URL, payload: { captchaUrl } })
+export const getCaptchaUrlAC = (captchaUrl) => ({ type: SET_CAPCHA_SUCCESS, payload: { captchaUrl } })
 
 //thunk=========================================
 
@@ -69,13 +72,14 @@ export const getAuthUserData = () => async (dispatch) => {
 		}
 	}
 }
-export const loginTC = (email, password, rememberMe, captcha = null) => async (dispatch) => {
-	const responce = await authAPI.login(email, password, rememberMe, captcha)
+export const loginTC = (email, password, rememberMe, captchaServerName = null) => async (dispatch) => {
+	const responce = await authAPI.login(email, password, rememberMe, captchaServerName)
 	if (responce.data.resultCode === 0) {
 		dispatch(getAuthUserData());
+
 	} else {
 		if (responce.data.resultCode === 10) {
-			dispatch(getСaptchaUrlTC())
+			dispatch(getCaptchaUrlTC())
 		}
 		let message = responce.data.messages.length > 0 ? responce.data.messages : 'some error'
 		dispatch(stopSubmit('loginForma', { _error: message }))
@@ -87,9 +91,9 @@ export const logoutTC = () => async (dispatch) => {
 		dispatch(setAuthUserDataAC(null, null, null, false));
 	}
 }
-export const getСaptchaUrlTC = () => async (dispatch) => {
-	const responce = await securityAPI.getСaptchaUrl();
-	dispatch(getСaptchaUrlAC(responce.data.url));
+export const getCaptchaUrlTC = () => async (dispatch) => {
+	const responce = await securityAPI.getCaptchaUrlAPI()
+	dispatch(getCaptchaUrlAC(responce.data.url));
 }
 
 export default authReducer;

@@ -20,23 +20,23 @@ const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
 					{error}
 				</div>
 			}
-
 			{
 				captchaUrl &&
 				<div>
-					<img src={captchaUrl} alt="хз" />
+					<img src={captchaUrl} alt="captchaUrl" />
 				</div>
 			}
 
-			{captchaUrl && createField(
-				Input,
-				'captchaFormFieldName',
-				'Enter symbols from image',
-				[required],
-				'text',
-				null
-			)}
-
+			{captchaUrl &&
+				createField(
+					Input,
+					'captchaInputValue',
+					'Enter the symbols from image',
+					[required],
+					'text',
+					null
+				)
+			}
 			<div>
 				<button>login</button>
 			</div>
@@ -50,11 +50,9 @@ const LoginReduxForm = reduxForm({ form: 'loginForma' })(LoginForm)
 
 const LoginPage = (props) => {
 
-	const onSubmit = (formData) => {
-		props.loginTC(formData.emailFormFieldName,
-			formData.passwordFormFieldName,
-			formData.rememberMeFormFieldName,
-			formData.captchaFormFieldName);
+
+	let onSubmit = (formData) => {
+		props.loginTC(formData.email, formData.password, formData.rememberMe, formData.captchaInputValue);
 	}
 
 	if (props.isAuth) {
@@ -63,7 +61,9 @@ const LoginPage = (props) => {
 
 	return <div>
 		<h1>This is login page</h1>
-		<LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl} />
+		<LoginReduxForm onSubmit={onSubmit}
+			captchaUrl={props.captchaUrl}
+		/>
 	</div>
 }
 const mapStateToProps = (state) => {
