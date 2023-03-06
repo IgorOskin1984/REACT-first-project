@@ -39,9 +39,9 @@ export const createField = (
 		<div>
 			<Field
 				component={componentValue} //*название компоненты Input или Textarea
-				name={nameValue} //* имя поля согласно API документации
+				name={nameValue} //* имя поля согласно API документации --FormFieldName
 				placeholder={placeholderValue}
-				validate={validateValue}
+				validate={validateValue} //*тут значния идут в массиве
 				type={typeValue}
 			/> {text}
 		</div>
