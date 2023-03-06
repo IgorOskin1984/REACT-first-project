@@ -2,6 +2,7 @@ import React from "react"
 import { reduxForm } from "redux-form"
 import { createField, Input, Textarea } from "../../../common/FormsControls/FormsControls"
 import style from './ProfileInfo.module.css'
+import style2 from './../../../common/FormsControls/FormsControls.module.css'
 
 const ProfileDataForm = ({ handleSubmit, error, profile }) => {
 	return (
@@ -70,24 +71,35 @@ const ProfileDataForm = ({ handleSubmit, error, profile }) => {
 				</p>
 			</div>
 
-			{/*
-			<div>
+
+			<div className={style.profileContacts}>
 				<span className={style.boldSpan}>Contacts</span>: {Object.keys(profile.contacts).map(key => {
-					return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />
+					return (
+						<li key={key}>
+							<span className={style.boldSpan}>{key}</span>:
+							{
+								createField(
+									Input,
+									'contacts.' + key,
+									key,
+									null,
+									null,
+								)
+							}
+						</li>
+					)
 				})}
 			</div>
-			<ProfileStatusWithHooks
-				//status = 'hello'
-				//
-				status={status}
-				updateUserStatusTC={updateUserStatusTC}
-				currentUserPofileId={profile.userId}
-				autorizedUserId={autorizedUserId}
-			/>*/}
+
+			{error &&
+				<div className={style2.formSummaryError}>
+					{error}
+				</div>
+			}
 		</form>
 	)
 }
 
-const ProfileDataFormReduxForm = reduxForm({ form: 'edit-profile' })(ProfileDataForm)
+const ProfileDataReduxForm = reduxForm({ form: 'edit_Profile' })(ProfileDataForm)
 
-export default ProfileDataFormReduxForm;
+export default ProfileDataReduxForm;

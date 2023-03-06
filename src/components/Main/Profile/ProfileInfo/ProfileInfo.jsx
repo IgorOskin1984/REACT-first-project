@@ -3,7 +3,7 @@ import style from './ProfileInfo.module.css';
 import Preloader from '../../../common/Preloader/Preloader';
 import userAvatar from './../../../../img/user_image_png.png'
 import { ProfileStatusWithHooks } from './ProfileStatusWithHooks';
-import ProfileDataFormReduxForm from './ProfileDataForm';
+import ProfileDataReduxForm from './ProfileDataForm';
 
 const ProfileInfo = ({ profile, isOwner, autorizedUserId, updateUserPhotoTC, setUserProfileTC }) => {
 
@@ -18,8 +18,8 @@ const ProfileInfo = ({ profile, isOwner, autorizedUserId, updateUserPhotoTC, set
 	}
 
 	let onSubmit = (formData) => {
-		setEditMode(false);
 		setUserProfileTC(formData, autorizedUserId)
+		//setEditMode(false);
 	}
 
 	if (!profile) {
@@ -48,9 +48,12 @@ const ProfileInfo = ({ profile, isOwner, autorizedUserId, updateUserPhotoTC, set
 						<h2 className={style.title}>My profile</h2>
 						<div className='profile__info'>
 							{editMode
-								? <ProfileDataFormReduxForm
+								? <ProfileDataReduxForm
 									initialValues={profile} //!начальные значения
-									isOwner={isOwner} onSubmit={onSubmit} />
+									isOwner={isOwner}
+									onSubmit={onSubmit}
+									profile={profile}
+								/>
 								: <ProfileData profile={profile} isOwner={isOwner} chengeEditMode={() => { setEditMode(true) }} />
 							}
 

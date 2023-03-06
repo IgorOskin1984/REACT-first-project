@@ -99,6 +99,10 @@ export const setUserProfileTC = (profile) => async (dispatch, getState) => {
 	if (responce.data.resultCode === 0) {
 		dispatch(getUserProfileThunkCreator(userId))
 	}
+	else {
+		const message = responce.data.messages.length > 0 ? responce.data.messages : 'some error'
+		dispatch(stopSubmit('edit_Profile', { _error: message }))
+	}
 }
 //!
 //*код ниже - это принцип работы thunk
