@@ -7,8 +7,7 @@ import wallpapers from './../../../img/01.jpg';
 
 //!наверно надо сделать Navigate
 
-const Profile = ({ profile, status, autorizedUserId, isOwner,
-	updateUserStatusTC, updateUserPhotoTC, setUserProfileTC }) => {
+const Profile = (props) => {
 
 	return (
 		<section className={style.wrapper} >
@@ -17,13 +16,13 @@ const Profile = ({ profile, status, autorizedUserId, isOwner,
 			</div>
 			<div className={style.contentBody}>
 				<ProfileInfo
-					isOwner={isOwner}
-					profile={profile}
-					status={status}
-					autorizedUserId={autorizedUserId}
-					updateUserStatusTC={updateUserStatusTC}
-					updateUserPhotoTC={updateUserPhotoTC}
-					setUserProfileTC={setUserProfileTC}
+					isOwner={props.isOwner}
+					profile={props.profile}
+					status={props.status}
+					autorizedUserId={props.autorizedUserId}
+					updateUserStatusTC={props.updateUserStatusTC}
+					updateUserPhotoTC={props.updateUserPhotoTC}
+					setUserProfileTC={props.setUserProfileTC}
 				/>
 				<div>
 					<PostInputContainer />

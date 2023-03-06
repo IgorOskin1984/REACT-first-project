@@ -5,7 +5,7 @@ import userAvatar from './../../../../img/user_image_png.png'
 import { ProfileStatusWithHooks } from './ProfileStatusWithHooks';
 import ProfileDataReduxForm from './ProfileDataForm';
 
-const ProfileInfo = ({ profile, isOwner, autorizedUserId, updateUserPhotoTC, setUserProfileTC }) => {
+const ProfileInfo = ({ profile, isOwner, ...props }) => {
 
 	//console.log(props);
 
@@ -13,12 +13,12 @@ const ProfileInfo = ({ profile, isOwner, autorizedUserId, updateUserPhotoTC, set
 
 	const onGetPotoFile = (e) => {
 		if (e.target.files.length) {
-			updateUserPhotoTC(e.target.files[0])
+			props.updateUserPhotoTC(e.target.files[0])
 		}
 	}
 
 	let onSubmit = (formData) => {
-		setUserProfileTC(formData).then(
+		props.setUserProfileTC(formData).then(
 			() => {
 				setEditMode(false);
 			}
@@ -57,11 +57,14 @@ const ProfileInfo = ({ profile, isOwner, autorizedUserId, updateUserPhotoTC, set
 									onSubmit={onSubmit}
 									profile={profile}
 								/>
-								: <ProfileData profile={profile} isOwner={isOwner} chengeEditMode={() => { setEditMode(true) }} />
+								: <ProfileData
+									profile={profile}
+									status={props.status}
+									isOwner={isOwner}
+									autorizedUserId={props.autorizedUserId}
+									updateUserStatusTC={props.updateUserStatusTC}
+									chengeEditMode={() => { setEditMode(true) }} />
 							}
-
-
-
 
 						</div>
 					</div>
@@ -72,7 +75,7 @@ const ProfileInfo = ({ profile, isOwner, autorizedUserId, updateUserPhotoTC, set
 	)
 }
 
-const ProfileData = ({ profile, status, autorizedUserId, isOwner, updateUserStatusTC, chengeEditMode }) => {
+const ProfileData = ({ isOwner, profile, chengeEditMode, ...props }) => {
 	return (
 		<div>
 			{isOwner &&
@@ -110,12 +113,10 @@ const ProfileData = ({ profile, status, autorizedUserId, isOwner, updateUserStat
 				})}
 			</div>
 			<ProfileStatusWithHooks
-				//status = 'hello'
-				//
-				status={status}
-				updateUserStatusTC={updateUserStatusTC}
 				currentUserPofileId={profile.userId}
-				autorizedUserId={autorizedUserId}
+				status={props.status}
+				updateUserStatusTC={props.updateUserStatusTC}
+				autorizedUserId={props.autorizedUserId}
 			/>
 		</div>
 	)
