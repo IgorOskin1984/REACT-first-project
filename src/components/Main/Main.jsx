@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import style from './Main.module.css';
 import Sidebar from "./Sidebar/Sidebar";
 import DialogsConteiner from "./Dialogs/DialogsContainer";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Music from "./Music/Music";
 import News from "./News/News";
 import Settings from "./Settings/Settings";
@@ -25,7 +25,8 @@ const Main = (props) => {
 					<Route path="/"
 						element={
 							<Suspense fallback={<div>Загрузка...</div>}>
-								<ProfileContainer />
+								{/*<ProfileContainer />*/}
+								<Navigate to="/profile" />
 							</Suspense>
 						} />
 					<Route path="/profile/*"

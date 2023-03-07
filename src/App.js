@@ -18,8 +18,18 @@ class App extends Component {
 	//	super(props);
 	//}
 
+	catchAllUnhandledErrors = (reason, promice) => {
+		alert('some error occured')
+	}
+
 	componentDidMount() {
-		this.props.autoficationTC()
+		this.props.autoficationTC();
+		window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+	}
+
+	//подчищаем за собой мусор
+	componentWillUnmount() {
+		window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
 	}
 
 	render() {
@@ -45,6 +55,9 @@ const AppContainer = compose(
 	withRouter,
 	connect(mapStateToProps, { autoficationTC })
 )(App);
+
+
+//========================================================================================================================================================
 
 const MainApp = (props) => {
 	return (
