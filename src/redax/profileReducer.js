@@ -76,18 +76,24 @@ export const getUserProfileThunkCreator = (userId) => async (dispatch) => {
 	const responce = await usersAPI.getProfile(userId);
 	dispatch(setUserProfile(responce, userId));
 }
-
 export const getUserStatusTC = (userId) => async (dispatch) => {
 	const responce = await profileAPI.getUserStatus(userId)
 	dispatch(setUserStatusAC(responce.data))
 }
-
+//!========================================================================================================================================================
 export const updateUserStatusTC = (status) => async (dispatch) => {
-	const responce = await profileAPI.updateUserStatus(status)
-	if (responce.data.resultCode === 0) {
-		dispatch(setUserStatusAC(status))
+	try {
+		debugger
+		const responce = await profileAPI.updateUserStatus(status)
+		if (responce.data.resultCode === 0) {
+			dispatch(setUserStatusAC(status))
+		}
+	} catch (error) {
+		debugger
+		alert('some error occured')
 	}
 }
+//!========================================================================================================================================================
 export const updateUserPhotoTC = (userPhoto) => async (dispatch) => {
 	const responce = await profileAPI.addUserPhotoAPI(userPhoto)
 	if (responce.data.resultCode === 0) {
