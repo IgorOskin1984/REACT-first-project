@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/REACT-first-project/static/css/main.da808bfa.css",
-    "main.js": "/REACT-first-project/static/js/main.92b2c6b8.js",
+    "main.css": "/REACT-first-project/static/css/main.71bfa51d.css",
+    "main.js": "/REACT-first-project/static/js/main.68a5a666.js",
     "static/js/787.28cb0dcd.chunk.js": "/REACT-first-project/static/js/787.28cb0dcd.chunk.js",
     "static/media/user_image_png.png": "/REACT-first-project/static/media/user_image_png.ee9a9e5738bd13d5fba5.png",
     "static/media/01.jpg": "/REACT-first-project/static/media/01.5df1050f6636bb9ca820.jpg",
     "static/media/smile.jpg": "/REACT-first-project/static/media/smile.c548b43c910766efbb80.jpg",
     "static/media/Spinner-1.5s-201px.svg": "/REACT-first-project/static/media/Spinner-1.5s-201px.4813f7b1936f4883de06201f3d0964e9.svg",
     "index.html": "/REACT-first-project/index.html",
-    "main.da808bfa.css.map": "/REACT-first-project/static/css/main.da808bfa.css.map",
-    "main.92b2c6b8.js.map": "/REACT-first-project/static/js/main.92b2c6b8.js.map",
+    "main.71bfa51d.css.map": "/REACT-first-project/static/css/main.71bfa51d.css.map",
+    "main.68a5a666.js.map": "/REACT-first-project/static/js/main.68a5a666.js.map",
     "787.28cb0dcd.chunk.js.map": "/REACT-first-project/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.da808bfa.css",
-    "static/js/main.92b2c6b8.js"
+    "static/css/main.71bfa51d.css",
+    "static/js/main.68a5a666.js"
   ]
 }
