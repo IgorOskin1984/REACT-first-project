@@ -9,6 +9,7 @@ import Settings from "./Settings/Settings";
 import UsersConteiner from "./Users/UsersContainer";
 import LoginPage from "../LoginPage/LoginPage";
 import withSuspense from "../../hoc/withSuspense";
+import ChatPage from "../../pages/Chat/ChatPage";
 
 const ProfileContainer = React.lazy(() => import('./Profile/ProfileContainer'));
 //import  from './Profile/ProfileContainer'
@@ -53,6 +54,8 @@ const Main = (props) => {
 						element={<UsersConteiner />} />
 					<Route path="/login"
 						element={<LoginPage />} />
+					<Route path="/chat"
+						element={<ChatPage />} />
 				</Routes>
 			</section>
 		</main>
