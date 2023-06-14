@@ -12,6 +12,7 @@ import withSuspense from "../../hoc/withSuspense";
 import ChatPage from "../../pages/Chat/ChatPage";
 
 const ProfileContainer = React.lazy(() => import('./Profile/ProfileContainer'));
+const LazyChatPage = React.lazy(() => import('./../../pages/Chat/ChatPage'));
 //import  from './Profile/ProfileContainer'
 
 const Main = (props) => {
@@ -55,7 +56,11 @@ const Main = (props) => {
 					<Route path="/login"
 						element={<LoginPage />} />
 					<Route path="/chat"
-						element={<ChatPage />} />
+						element={
+							<Suspense fallback={<div>Загрузка...</div>}>
+								<LazyChatPage />
+							</Suspense>
+						} />
 				</Routes>
 			</section>
 		</main>
