@@ -29,15 +29,18 @@ const Sidebar = (prpos) => {
 					<li className={style.sidebar__item}>
 						<NavLink to={'/users'} className={style.sidebar__link}>All users</NavLink>
 					</li>
+					<li className={style.sidebar__item}>
+						<NavLink to={'/chat'} className={style.sidebar__link}>ChatPage</NavLink>
+					</li>
 				</ul>
 			</nav>
 
 			<div className={style.friendsSection}>
 				<span>Friends online</span>
-				<SideFriend/>
-				<SideFriend/>
-				<SideFriend/>
-				<SideFriend/>
+				<SideFriend />
+				<SideFriend />
+				<SideFriend />
+				<SideFriend />
 			</div>
 		</aside>
 	)
