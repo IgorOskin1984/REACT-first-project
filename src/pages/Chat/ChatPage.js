@@ -52,6 +52,7 @@ const Message = ({ message }) => {
 const AddMessageForm = () => {
 	const [message, setMessage] = useState('');
 	const onClickHandle = () => {
+		if (!message) return
 		wsChanal.send(message);
 		setMessage('')
 	}
