@@ -21,13 +21,28 @@ const Chat = () => {
 
 const Messages = () => {
 	const arr = [1, 2, 3]
-	return arr.map((message) => {
-		return <Message />
-	})
+	return <div style={{ height: '500px', overflow: 'auto' }}>
+		{arr.map((message) => <Message />)}
+		{arr.map((message) => <Message />)}
+		{arr.map((message) => <Message />)}
+	</div>
 }
 
 const Message = () => {
-	return <div>message</div>
+
+	const message = {
+		ulr: 'https://placehold.co/60x40',
+		author: 'Ihor',
+		text: 'Hello'
+
+	}
+
+	return <div>
+		<img src={message.ulr} alt="image" />
+		<b>{message.author}</b>
+		<p>{message.text}</p>
+		<hr />
+	</div>
 }
 
 
