@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
 
 const ChatPage = () => {
 	return <>
@@ -11,6 +13,9 @@ const ChatPage = () => {
 export default ChatPage;
 
 const Chat = () => {
+	useEffect(() => {
+		ws.onmessage = (e) => console.log(JSON.parse(e.data))
+	}, [])
 	return <>
 		<div>
 			<Messages />
