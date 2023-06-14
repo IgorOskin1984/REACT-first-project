@@ -22,30 +22,26 @@ const Chat = () => {
 }
 
 const Messages = () => {
-	const arr = [1, 2, 3]
+	const [messages, setMessages] = useState([])
 	useEffect(() => {
-		ws.onmessage = (e) => console.log(JSON.parse(e.data))
+		ws.onmessage = (e) => {
+			console.log('hello');
+			console.log(JSON.parse(e.data));
+			setMessages(JSON.parse(e.data))
+		}
 	}, [])
 	return <div style={{ height: '500px', overflow: 'auto' }}>
-		{arr.map((message) => <Message />)}
-		{arr.map((message) => <Message />)}
-		{arr.map((message) => <Message />)}
+		{messages.map((message) => <Message key={message.userId} message={message} />)}
 	</div>
 }
 
-const Message = () => {
+const Message = ({ message }) => {
 
-	const message = {
-		ulr: 'https://placehold.co/60x40',
-		author: 'Ihor',
-		text: 'Hello'
-
-	}
 
 	return <div>
-		<img src={message.ulr} alt="image" />
-		<b>{message.author}</b>
-		<p>{message.text}</p>
+		<img src={message.photo} alt="image" />
+		<b>{message.userName}</b>
+		<p>{message.message}</p>
 		<hr />
 	</div>
 }
